@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://bqurs3jtj1sxj"]
+[gd_scene load_steps=3 format=3 uid="uid://bj5dshxnkk4hi"]
 
-[node name="Node2D" type="Node2D" unique_id=902372775]
+[ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://card.tscn" id="1_wgkm8"]
+[ext_resource type="Script" path="res://cardlogic.gd" id="2_qxt8l"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Card" parent="." instance=ExtResource("1_wgkm8")]
+position = Vector2(-2, -9)
+
+[node name="Card2" parent="." instance=ExtResource("1_wgkm8")]
+position = Vector2(235, 51)
+
+[node name="CardLogic" type="Node2D" parent="."]
+position = Vector2(-225, -45)
+script = ExtResource("2_qxt8l")
