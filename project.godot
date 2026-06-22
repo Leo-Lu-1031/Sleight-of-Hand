@@ -19,9 +19,18 @@ run/main_scene="res://node_2d.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [display]
 
 window/vsync/vsync_mode=0
+
+[layer_names]
+
+2d_physics/layer_1="Card"
+2d_physics/layer_2="Area"
 
 [physics]
 

@@ -1,28 +1,39 @@
 extends Node2D
 
 var card_being_dragged
+var card_rel_pos
+
 var screen_size
-
-const COLLISION_MASK_CARD = 1
-
 
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
-			card_being_dragged = raycast_card()
+			var raycast_retval = raycast(Global.COLLISION_MASK_CARD)
+			if raycast_retval:
+				card_being_dragged = raycast_retval[0]
+				card_rel_pos = raycast_retval[1]
+			else:
+				card_being_dragged = null
+				card_rel_pos = null
 		else:
+			var raycast_retval = raycast(Global.COLLISION_MASK_AREA)
+			if raycast_retval and raycast_retval[0] == $PlayArea:
+				card_being_dragged.play()
 			card_being_dragged = null
+			card_rel_pos = null
 
-func raycast_card():
+func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
 	parameters.collide_with_areas = true
-	parameters.collision_mask = COLLISION_MASK_CARD
+	parameters.collision_mask = mask
 	var result = space_state.intersect_point(parameters)
 	if result:
 		print(result[0].collider.get_parent())
-		return result[0].collider.get_parent()
+		var parent = result[0].collider.get_parent()
+		var offset = parent.position - parameters.position
+		return [parent, offset]
 	else:
 		return null
 
@@ -34,7 +45,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if card_being_dragged:
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos = get_global_mouse_position() + card_rel_pos
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x,0,screen_size.x),
 		clamp(mouse_pos.y,0,screen_size.y))
 		
