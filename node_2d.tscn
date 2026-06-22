@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj5dshxnkk4hi"]
+[gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
-[ext_resource type="Script" path="res://Global.gd" id="1_1m07i"]
-[ext_resource type="Script" path="res://hand_area.gd" id="1_je02g"]
+[ext_resource type="Script" uid="uid://c4fy1djrlvnpr" path="res://Global.gd" id="1_1m07i"]
+[ext_resource type="Script" uid="uid://cesjpuhv5k1tu" path="res://hand_area.gd" id="1_je02g"]
 [ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://card.tscn" id="1_wgkm8"]
-[ext_resource type="Script" path="res://cardlogic.gd" id="2_qxt8l"]
+[ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://cardlogic.gd" id="2_qxt8l"]
 
 [sub_resource type="GDScript" id="GDScript_5m7pn"]
 script/source = "extends Area2D
@@ -25,30 +25,30 @@ size = Vector2(1142, 284.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lovdm"]
 size = Vector2(1144, 178)
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1312786482]
 script = ExtResource("1_1m07i")
 
-[node name="PlayArea" type="Area2D" parent="."]
+[node name="PlayArea" type="Area2D" parent="." unique_id=397114952]
 collision_layer = 2
 script = SubResource("GDScript_5m7pn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea" unique_id=1310101074]
 position = Vector2(577, 142.75)
 shape = SubResource("RectangleShape2D_sbtlp")
 
-[node name="HandArea" type="Area2D" parent="."]
+[node name="HandArea" type="Area2D" parent="." unique_id=705804099]
 script = ExtResource("1_je02g")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HandArea" unique_id=1239218077]
 position = Vector2(576, 557)
 shape = SubResource("RectangleShape2D_lovdm")
 
-[node name="Card" parent="." instance=ExtResource("1_wgkm8")]
-position = Vector2(599, 485)
-
-[node name="Card2" parent="." instance=ExtResource("1_wgkm8")]
-position = Vector2(385, 489)
-
-[node name="CardLogic" type="Node2D" parent="."]
+[node name="CardLogic" type="Node2D" parent="." unique_id=882268620]
 position = Vector2(-225, -45)
 script = ExtResource("2_qxt8l")
+
+[node name="Card" parent="CardLogic" unique_id=768357193 instance=ExtResource("1_wgkm8")]
+position = Vector2(824, 530)
+
+[node name="Card2" parent="CardLogic" unique_id=555519452 instance=ExtResource("1_wgkm8")]
+position = Vector2(610, 534)

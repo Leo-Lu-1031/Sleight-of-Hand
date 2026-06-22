@@ -49,3 +49,12 @@ func _process(delta: float) -> void:
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x,0,screen_size.x),
 		clamp(mouse_pos.y,0,screen_size.y))
 		
+func connect_card_signals(card):
+	card.connect("hovered",on_hovered_over_card)
+	card.connect("hovered_off",on_hovered_off_card)
+	
+func on_hovered_over_card(card):
+	print("Hovered")
+	
+func on_hovered_off_card(card):
+	print("Hovered off")
