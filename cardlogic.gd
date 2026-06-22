@@ -16,9 +16,9 @@ func _input(event):
 				card_being_dragged = null
 				card_rel_pos = null
 		else:
-			var raycast_retval = raycast(Global.COLLISION_MASK_AREA)
-			if raycast_retval and raycast_retval[0] == $PlayArea:
-				card_being_dragged.play()
+			#var raycast_retval = raycast(Global.COLLISION_MASK_AREA)
+			#if raycast_retval and raycast_retval[0] == $PlayArea:
+				#card_being_dragged.play()
 			card_being_dragged = null
 			card_rel_pos = null
 
