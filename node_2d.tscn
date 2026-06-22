@@ -1,47 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bj5dshxnkk4hi"]
+[gd_scene load_steps=4 format=3 uid="uid://bj5dshxnkk4hi"]
 
 [ext_resource type="Script" path="res://Global.gd" id="1_1m07i"]
-[ext_resource type="Script" path="res://hand_area.gd" id="1_je02g"]
 [ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://card.tscn" id="1_wgkm8"]
 [ext_resource type="Script" path="res://cardlogic.gd" id="2_qxt8l"]
 
-[sub_resource type="GDScript" id="GDScript_5m7pn"]
-script/source = "extends Area2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbtlp"]
-size = Vector2(1142, 284.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lovdm"]
-size = Vector2(1144, 178)
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1m07i")
-
-[node name="PlayArea" type="Area2D" parent="."]
-collision_layer = 2
-script = SubResource("GDScript_5m7pn")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(577, 142.75)
-shape = SubResource("RectangleShape2D_sbtlp")
-
-[node name="HandArea" type="Area2D" parent="."]
-script = ExtResource("1_je02g")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HandArea"]
-position = Vector2(576, 557)
-shape = SubResource("RectangleShape2D_lovdm")
 
 [node name="CardLogic" type="Node2D" parent="."]
 position = Vector2(-225, -45)

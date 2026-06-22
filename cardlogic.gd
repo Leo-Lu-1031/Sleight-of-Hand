@@ -13,7 +13,8 @@ func _input(event):
 			if raycast_retval:
 				start_drag(raycast_retval)
 		else:
-			finish_drag()
+			if card_being_dragged:
+				finish_drag()
 
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
