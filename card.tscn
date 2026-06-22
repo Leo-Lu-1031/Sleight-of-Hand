@@ -16,7 +16,7 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_al6o5")
 
 [node name="CardImg" type="Sprite2D" parent="." unique_id=1202621308]
-position = Vector2(-1, 1)
+position = Vector2(1, 1)
 scale = Vector2(0.264286, 0.562366)
 texture = ExtResource("1_gebh6")
 
