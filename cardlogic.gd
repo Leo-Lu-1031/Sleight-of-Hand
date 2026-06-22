@@ -11,17 +11,9 @@ func _input(event):
 		if event.pressed:
 			var raycast_retval = raycast(Global.COLLISION_MASK_CARD)
 			if raycast_retval:
-				card_being_dragged = raycast_retval[0]
-				card_rel_pos = raycast_retval[1]
-			else:
-				card_being_dragged = null
-				card_rel_pos = null
+				start_drag(raycast_retval)
 		else:
-			var raycast_retval = raycast(Global.COLLISION_MASK_AREA)
-			if raycast_retval and raycast_retval[0] == $PlayArea:
-				card_being_dragged.play()
-			card_being_dragged = null
-			card_rel_pos = null
+			finish_drag()
 
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
@@ -88,3 +80,14 @@ func highlight_card(card,hovered):
 	else:
 		card.scale = Vector2(1.00,1.00)
 		card.z_index = 1
+
+func start_drag(card):
+	card_being_dragged = card[0]
+	card_rel_pos = card[1]
+	card[0].scale = Vector2(1,1)
+	
+func finish_drag():
+	card_being_dragged.scale = Vector2(1.05,1.05)
+	card_being_dragged = null
+	card_rel_pos = null
+	
