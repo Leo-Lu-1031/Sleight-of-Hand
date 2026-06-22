@@ -16,9 +16,9 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_al6o5")
 
 [node name="CardImg" type="Sprite2D" parent="." unique_id=1202621308]
-position = Vector2(-1, 1)
-scale = Vector2(0.264286, 0.562366)
-texture = ExtResource("1_gebh6")
+position = Vector2(0.9999998, 0)
+scale = Vector2(0.37399998, 0.35812673)
+texture = ExtResource("2_rjlel")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
