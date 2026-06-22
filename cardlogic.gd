@@ -13,7 +13,8 @@ func _input(event):
 			if raycast_retval:
 				start_drag(raycast_retval)
 		else:
-			finish_drag()
+			if card_being_dragged:
+				finish_drag()
 
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
@@ -66,11 +67,12 @@ func on_hovered_over_card(card):
 	
 func on_hovered_off_card(card):
 	highlight_card(card,false)
-	var new_card_hovered = raycast(Global.COLLISION_MASK_CARD)
-	if new_card_hovered:
-		highlight_card(new_card_hovered[0],true)
-	else:
-		is_hovering_on_card = false	
+	if !card_being_dragged:
+		var new_card_hovered = raycast(Global.COLLISION_MASK_CARD)
+		if new_card_hovered:
+			highlight_card(new_card_hovered[0],true)
+		else:
+			is_hovering_on_card = false	
 		
 		
 func highlight_card(card,hovered):
@@ -84,7 +86,7 @@ func highlight_card(card,hovered):
 func start_drag(card):
 	card_being_dragged = card[0]
 	card_rel_pos = card[1]
-	card[0].scale = Vector2(1,1)
+	card_being_dragged.scale = Vector2(1,1)
 	
 func finish_drag():
 	card_being_dragged.scale = Vector2(1.05,1.05)
