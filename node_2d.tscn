@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bj5dshxnkk4hi"]
+[gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
-[ext_resource type="Script" path="res://Global.gd" id="1_1m07i"]
+[ext_resource type="Script" uid="uid://c4fy1djrlvnpr" path="res://Global.gd" id="1_1m07i"]
 [ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://card.tscn" id="1_wgkm8"]
-[ext_resource type="Script" path="res://cardlogic.gd" id="2_qxt8l"]
+[ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://cardlogic.gd" id="2_qxt8l"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=1141900535]
 script = ExtResource("1_1m07i")
 
-[node name="CardLogic" type="Node2D" parent="."]
+[node name="CardLogic" type="Node2D" parent="." unique_id=863470049]
 position = Vector2(-225, -45)
 script = ExtResource("2_qxt8l")
 
-[node name="Card" parent="CardLogic" instance=ExtResource("1_wgkm8")]
+[node name="Card" parent="CardLogic" unique_id=1275946058 instance=ExtResource("1_wgkm8")]
 position = Vector2(824, 530)
 
-[node name="Card2" parent="CardLogic" instance=ExtResource("1_wgkm8")]
+[node name="Card2" parent="CardLogic" unique_id=1851541946 instance=ExtResource("1_wgkm8")]
 position = Vector2(610, 534)

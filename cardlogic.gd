@@ -12,9 +12,11 @@ func _input(event):
 			var raycast_retval = raycast(Global.COLLISION_MASK_CARD)
 			if raycast_retval:
 				start_drag(raycast_retval)
+				raycast_retval[0].flip_card()
 		else:
 			if card_being_dragged:
 				finish_drag()
+
 
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
@@ -92,4 +94,5 @@ func finish_drag():
 	card_being_dragged.scale = Vector2(1.05,1.05)
 	card_being_dragged = null
 	card_rel_pos = null
+
 	
