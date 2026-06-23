@@ -1,9 +1,9 @@
 extends Node
 
-@export var card_scene: PackedScene
+@export var card_scene = preload("res://card.tscn")
 @export var cards_folder := "res://Cards_Folder/"
 
-@onready var CardLogic = $"../CardLogic"
+@onready var CardLogic = $"/root/Main/CardLogic"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

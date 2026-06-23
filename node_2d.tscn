@@ -19,4 +19,3 @@ position = Vector2(503, 516)
 
 [node name="CardLoader" type="Node" parent="." unique_id=24616784]
 script = ExtResource("1_epypp")
-card_scene = ExtResource("1_wgkm8")
