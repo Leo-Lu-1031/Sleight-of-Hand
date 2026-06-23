@@ -3,7 +3,7 @@ extends Node2D
 signal hovered
 signal hovered_off
 
-@onready var sprite_front = $CardImg
+@onready var sprite_front = $"CardImg"
 @onready var sprite_back = $PokerBack
 
 # Called when the node enters the scene tree for the first time.
