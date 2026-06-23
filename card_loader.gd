@@ -3,11 +3,12 @@ extends Node
 @export var card_scene = preload("res://card.tscn")
 @export var cards_folder := "res://Cards_Folder/"
 
-@onready var CardLogic = $"/root/Main/CardLogic"
+@onready var CardLogic = $"CardLogic"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_cards_from_folder()
+	print(self)
 
 func load_cards_from_folder():
 	var dir := DirAccess.open(cards_folder)
@@ -23,7 +24,7 @@ func load_cards_from_folder():
 			var texture := load(image_path)
 
 			var card = card_scene.instantiate()
-			print("instantiated ", file_name)
+			#print("instantiated ", file_name)
 			CardLogic.add_child(card)
 
 			card.set_card_texture(texture)
