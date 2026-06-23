@@ -38,3 +38,6 @@ func flip_card():
 		show_back()
 	elif showing_front == false:
 		show_front()
+		
+func set_card_texture(texture):
+	sprite_front.texture = texture
