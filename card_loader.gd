@@ -1,7 +1,7 @@
 extends Node
 
 @export var card_scene: PackedScene
-@export var cards_folder := "res://Cards_Folder"
+@export var cards_folder := "res://Cards_Folder/"
 
 @onready var CardLogic = $"../CardLogic"
 
@@ -18,15 +18,15 @@ func load_cards_from_folder():
 	var files := dir.get_files()
 	var x := 0
 	for file_name in files:
-		print(cards_folder)
-		var image_path := cards_folder + "f{/file_name}"
-		var texture := load(image_path)
+		if file_name.ends_with(".png"):
+			var image_path := cards_folder + file_name
+			var texture := load(image_path)
 
-		var card = card_scene.instantiate()
-		CardLogic.add_child(card)
+			var card = card_scene.instantiate()
+			CardLogic.add_child(card)
 
-		card.set_card_texture(texture)
-		card.position = Vector2(x * 120, 0)
+			card.set_card_texture(texture)
+			card.position = Vector2(x * 120, 0)
 
 		x += 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -15,7 +15,7 @@ script = ExtResource("2_qxt8l")
 position = Vector2(808, 523)
 
 [node name="Card2" parent="CardLogic" unique_id=1851541946 instance=ExtResource("1_wgkm8")]
-position = Vector2(568, 523)
+position = Vector2(503, 516)
 
 [node name="CardLoader" type="Node" parent="." unique_id=24616784]
 script = ExtResource("1_epypp")

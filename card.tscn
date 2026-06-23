@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://r0ra2gvqkbs2"]
 
 [ext_resource type="Script" uid="uid://duq5i5iglxg63" path="res://card.gd" id="1_6gpoa"]
-[ext_resource type="Texture2D" path="res://Cards_Folder/PNG-cards-1.3/red_joker.png" id="2_rjlel"]
+[ext_resource type="Texture2D" uid="uid://b8hbksmgm28nu" path="res://Cards_Folder/red_joker.png" id="2_q5obu"]
 [ext_resource type="Texture2D" uid="uid://tflm4ijcr3js" path="res://Poker Back.png" id="3_q5obu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_al6o5"]
@@ -19,7 +19,7 @@ shape = SubResource("RectangleShape2D_al6o5")
 [node name="CardImg" type="Sprite2D" parent="." unique_id=795236220]
 position = Vector2(1, 0)
 scale = Vector2(0.374, 0.358127)
-texture = ExtResource("2_rjlel")
+texture = ExtResource("2_q5obu")
 
 [node name="PokerBack" type="Sprite2D" parent="." unique_id=781613061]
 position = Vector2(0.7500026, 2.861023e-06)
