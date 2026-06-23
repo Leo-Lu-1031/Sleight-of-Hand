@@ -16,6 +16,7 @@ func _input(event):
 			if card_being_dragged:
 				finish_drag()
 
+
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
@@ -92,4 +93,5 @@ func finish_drag():
 	card_being_dragged.scale = Vector2(1.05,1.05)
 	card_being_dragged = null
 	card_rel_pos = null
+
 	
