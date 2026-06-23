@@ -23,6 +23,7 @@ func load_cards_from_folder():
 			var texture := load(image_path)
 
 			var card = card_scene.instantiate()
+			print("instantiated ", file_name)
 			CardLogic.add_child(card)
 
 			card.set_card_texture(texture)
