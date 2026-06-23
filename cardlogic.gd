@@ -12,6 +12,7 @@ func _input(event):
 			var raycast_retval = raycast(Global.COLLISION_MASK_CARD)
 			if raycast_retval:
 				start_drag(raycast_retval)
+				raycast_retval[0].flip_card()
 		else:
 			if card_being_dragged:
 				finish_drag()
