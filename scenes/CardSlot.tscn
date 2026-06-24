@@ -4,14 +4,14 @@
 [ext_resource type="Script" uid="uid://dyhorw82ievbv" path="res://scripts/card_slot.gd" id="1_mt86f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytui5"]
-size = Vector2(196, 273)
+size = Vector2(98, 136)
 
 [node name="CardSlot" type="Node2D" unique_id=355683985]
 script = ExtResource("1_mt86f")
 
 [node name="CardSlotImg" type="Sprite2D" parent="." unique_id=75172095]
-position = Vector2(8.34465e-06, 4.61936e-06)
-scale = Vector2(0.25126904, 0.2411972)
+position = Vector2(-3.8146973e-06, -7.6293945e-06)
+scale = Vector2(0.12436548, 0.11971831)
 texture = ExtResource("1_5tl20")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=704524363]
@@ -19,5 +19,4 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1964867914]
-position = Vector2(-3.8146973e-06, -0.5000076)
 shape = SubResource("RectangleShape2D_ytui5")

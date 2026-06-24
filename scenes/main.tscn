@@ -14,7 +14,7 @@ position = Vector2(298, 348)
 script = ExtResource("3_jyhfs")
 
 [node name="Card" parent="CardManager" unique_id=1275946058 instance=ExtResource("3_o6xl0")]
-position = Vector2(526, 394)
+position = Vector2(554, 347)
 
 [node name="PlayerHand" type="Node2D" parent="." unique_id=1625243695]
 script = ExtResource("5_tbgi4")

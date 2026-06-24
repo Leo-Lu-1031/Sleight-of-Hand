@@ -5,7 +5,14 @@ var card_rel_pos
 
 var screen_size
 var is_hovering_on_card
+var player_hand_reference
 
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	screen_size = get_viewport_rect().size
+	player_hand_reference = $"../PlayerHand"
+	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
@@ -43,10 +50,6 @@ func get_card_with_highest_z_index(cards):
 			highest_z_index = current_card.z_index
 	return highest_z_card
 			
-		
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	screen_size = get_viewport_rect().size
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -93,9 +96,12 @@ func finish_drag():
 	var card_slot = raycast(Global.COLLISION_MASK_SLOT)
 	if card_slot: card_slot = card_slot[0]
 	if card_slot and !card_slot.card_in_slot:
+		player_hand_reference.remove_card_from_hand(card_being_dragged)
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot.card_in_slot = true
+	else:
+		player_hand_reference.add_card_to_hand(card_being_dragged)
 	card_being_dragged = null
 	card_rel_pos = null
 
