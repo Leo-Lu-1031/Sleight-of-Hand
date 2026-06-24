@@ -12,10 +12,10 @@ var center_screen_x
 
 @onready var CardManager = $"../CardManager"
 
-# Called when the node enters the scene tree for the first time.
+# Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	center_screen_x = get_viewport().size.x / 2
-	
+'''
 	var card_scene = preload(CARD_SCENE_PATH)
 	var dir := DirAccess.open(CARDS_FOLDER_PATH)
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 			card.position = Vector2(x * 120, 0)
 			
 		x += 1
-			
+'''
 
 		
 func add_card_to_hand(card):

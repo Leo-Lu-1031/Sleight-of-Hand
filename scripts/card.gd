@@ -4,6 +4,7 @@ signal hovered
 signal hovered_off
 
 var starting_position
+
 @onready var sprite_front = $"CardImg"
 @onready var sprite_back = $PokerBack
 
