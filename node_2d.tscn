@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
-[ext_resource type="Script" uid="uid://c6vymekmsklbu" path="res://card_loader.gd" id="1_epypp"]
 [ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://card.tscn" id="1_wgkm8"]
 [ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://cardlogic.gd" id="2_qxt8l"]
 
 [node name="Main" type="Node2D" unique_id=1141900535]
-script = ExtResource("1_epypp")
 
 [node name="CardLogic" type="Node2D" parent="." unique_id=863470049]
 position = Vector2(-225, -45)
@@ -13,6 +11,3 @@ script = ExtResource("2_qxt8l")
 
 [node name="Card" parent="CardLogic" unique_id=1275946058 instance=ExtResource("1_wgkm8")]
 position = Vector2(747, 513)
-
-[node name="CardLoader" type="Node" parent="." unique_id=24616784]
-script = ExtResource("1_epypp")
