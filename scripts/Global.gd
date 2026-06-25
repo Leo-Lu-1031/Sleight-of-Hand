@@ -2,6 +2,7 @@ extends Node2D
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_SLOT = 2
+const COLLISION_MASK_DECK = 3
 
 const CARD_WIDTH = 100
 const CARD_HEIGHT = 150

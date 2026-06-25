@@ -39,7 +39,6 @@ func _ready() -> void:
 			var texture := load(image_path)
 			var card = card_scene.instantiate()
 			CardManager.add_child(card)
-			card.name = file_name
 			
 			player_deck.append(card)
 
@@ -47,13 +46,24 @@ func _ready() -> void:
 			card.position = - Vector2(0, x*2)
 		if x < 10:	
 			x += 1
-	shuffle()
+	shuffle() #WTF Why does this even work? The shuffle should only shuffle the position of them in the list, not in the physical world>>
 
 func shuffle():
 	player_deck.shuffle()
+	
+func draw(card):
+	player_hand_reference.add_card_to_hand(card)
+	remove_card_from_deck(card)
+	
+
+func remove_card_from_deck(card):
+	if card in player_deck:
+		player_deck.erase(card)
+"""Unfinished - add update deck position here once done"""
 
 
 	
 """Code that turns all the cards in the deck non interactable"""
 """Other code that allows to interact with the top of deck"""
 "Update Deck looks when something changes"
+"func draw card"

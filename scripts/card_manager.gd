@@ -23,7 +23,7 @@ func _input(event):
 		else:
 			if card_being_dragged:
 				finish_drag()
-
+'
 func raycast(mask):
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
@@ -32,7 +32,6 @@ func raycast(mask):
 	parameters.collision_mask = mask
 	var result = space_state.intersect_point(parameters)
 	if result:
-		print(result[0].collider.get_parent())
 		var parent = get_card_with_highest_z_index(result)
 		var offset = parent.position - parameters.position
 		return [parent, offset]
