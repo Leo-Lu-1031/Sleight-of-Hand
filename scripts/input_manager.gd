@@ -5,9 +5,9 @@ var deck_reference
 var player_hand_reference
 
 func _ready() -> void:
-	card_manager_reference = $"../CardManager"
-	deck_reference = $"../Deck"
-	player_hand_reference = $"../PlayerHand"
+	card_manager_reference = $"../Hand/CardManager"
+	deck_reference = $"../Hand/Deck"
+	player_hand_reference = $"../Hand/PlayerHand"
 	
 func _input(event) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
