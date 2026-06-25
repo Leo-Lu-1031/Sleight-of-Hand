@@ -2,12 +2,12 @@ extends Node2D
 
 var card_manager_reference
 var deck_reference
-var player_hand_reference
+var hand_reference
 
 func _ready() -> void:
-	card_manager_reference = $"../Hand/CardManager"
-	deck_reference = $"../Hand/Deck"
-	player_hand_reference = $"../Hand/PlayerHand"
+	card_manager_reference = $"../PlayerHand/CardManager"
+	deck_reference = $"../PlayerHand/Deck"
+	hand_reference = $"../PlayerHand"
 	
 func _input(event) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

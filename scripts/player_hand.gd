@@ -1,5 +1,5 @@
 extends Node
-class_name Hand_Component
+class_name Hand
 
 const HAND_COUNT = 3
 
@@ -10,7 +10,7 @@ const CARDS_FOLDER_PATH = "res://assets/Cards_Folder/"
 @export var SHOW_FRONT = false
 @export var DECK_POS: Vector2
 
-var player_hand = []
+var hand_array = []
 var center_screen_x
 var hand_y_pos
 
@@ -25,25 +25,29 @@ func _ready() -> void:
 	Deck.set_deck_position(DECK_POS)
 		
 func add_card_to_hand(card):
-	if card not in player_hand:
-		player_hand.insert(0,card)
-		update_hand_positions()
-		if !card.showing_front and SHOW_FRONT:
-			card.show_front()
-	else:
-		animate_card_to_position(card,card.starting_position)
+	if card is Card:
+		if card not in hand_array:
+			hand_array.insert(0,card)
+			update_hand_positions()
+			if !card.showing_front and SHOW_FRONT:
+				card.show_front()
+			if card.showing_front and !SHOW_FRONT:
+				card.show_back()
+		else:
+			animate_card_to_position(card,card.starting_position)
 		
 
 func update_hand_positions():
-	for i in range(player_hand.size()):
+	for i in range(hand_array.size()):
 		var new_position = Vector2(calculate_card_position(i), hand_y_pos)
-		var card = player_hand[i]
+		var card = hand_array[i]
+		print(hand_array)
 		card.starting_position = new_position
 		animate_card_to_position(card, new_position)
 		
 		
 func calculate_card_position(index):
-	var total_width = (player_hand.size() - 1)*Global.CARD_WIDTH
+	var total_width = (hand_array.size() - 1)*Global.CARD_WIDTH
 	var x_position = center_screen_x + index*Global.CARD_WIDTH - total_width/2.0
 	return x_position
 	
@@ -52,6 +56,6 @@ func animate_card_to_position(card, new_position):
 	tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_EXPO)
 
 func remove_card_from_hand(card):
-	if card in player_hand:
-		player_hand.erase(card)
+	if card in hand_array:
+		hand_array.erase(card)
 		update_hand_positions()

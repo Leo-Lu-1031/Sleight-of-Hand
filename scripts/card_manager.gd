@@ -5,13 +5,13 @@ var card_rel_pos
 
 var screen_size
 var is_hovering_on_card
-var player_hand_reference
+var hand_reference
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	player_hand_reference = get_parent()
+	hand_reference = get_parent()
 	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -80,10 +80,11 @@ func on_hovered_off_card(card):
 func highlight_card(card,hovered):
 	if hovered:
 		card.scale = Vector2(1.05,1.05)
-		card.z_index = 2
+		card.memorized_z_index = card.z_index
+		card.z_index = 100
 	else:
 		card.scale = Vector2(1.00,1.00)
-		card.z_index = 1
+		card.z_index = card.memorized_z_index
 
 func start_drag(card):
 	card_being_dragged = card[0]
@@ -95,12 +96,12 @@ func finish_drag():
 	var card_slot = raycast(Global.COLLISION_MASK_SLOT)
 	if card_slot: card_slot = card_slot[0]
 	if card_slot and !card_slot.card_in_slot:
-		player_hand_reference.remove_card_from_hand(card_being_dragged)
+		hand_reference.remove_card_from_hand(card_being_dragged)
 		card_being_dragged.position = card_slot.position
 		card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot.card_in_slot = true
 	else:
-		player_hand_reference.add_card_to_hand(card_being_dragged)
+		hand_reference.add_card_to_hand(card_being_dragged)
 	card_being_dragged = null
 	card_rel_pos = null
 

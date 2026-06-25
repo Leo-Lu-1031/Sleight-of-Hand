@@ -7,7 +7,7 @@ const CARD_WIDTH = 100
 var center_screen_x
 var player_deck = []
 var player_hand = []
-var player_hand_reference
+var hand_reference
 
 # Set by parent
 var deck_position: Vector2
@@ -22,7 +22,7 @@ func set_deck_position(pos: Vector2):
 		card.position = deck_position - 2 * min(i,10) * Vector2(0, 1)
 	
 func _ready() -> void:
-	player_hand_reference = get_parent()
+	hand_reference = get_parent()
 	center_screen_x = get_viewport().size.x / 2
 	
 	var card_scene = preload(CARD_SCENE_PATH)
@@ -41,20 +41,20 @@ func _ready() -> void:
 			CardManager.add_child(card)
 			
 			player_deck.append(card)
+			card.z_index = x
 
 			card.set_card_texture(texture)
-			card.position = - Vector2(0, x*2)
-		if x < 10:	
+			card.position = - Vector2(0, min(x,0)*2)
 			x += 1
-	shuffle() #WTF Why does this even work? The shuffle should only shuffle the position of them in the list, not in the physical world>>
+			
+	shuffle()
 
 func shuffle():
 	player_deck.shuffle()
 	
 func draw(card):
-	player_hand_reference.add_card_to_hand(card)
+	hand_reference.add_card_to_hand(card)
 	remove_card_from_deck(card)
-	
 
 func remove_card_from_deck(card):
 	if card in player_deck:

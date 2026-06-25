@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bcy2d483fepkl"]
+
+[ext_resource type="Script" uid="uid://cv5wucd5pjexv" path="res://scripts/player_hand.gd" id="1_k7pjy"]
+[ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="2_m1v21"]
+[ext_resource type="Script" uid="uid://bc1ul2tent6r" path="res://scripts/deck.gd" id="3_kdemd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gkhac"]
+
+[node name="Hand" type="Node2D" unique_id=617236071]
+script = ExtResource("1_k7pjy")
+IS_AT_TOP = true
+SHOW_FRONT = true
+DECK_POS = Vector2(960, 540)
+
+[node name="CardManager" type="Node2D" parent="." unique_id=466322861]
+script = ExtResource("2_m1v21")
+
+[node name="Deck" type="Node2D" parent="." unique_id=1257428946]
+script = ExtResource("3_kdemd")
+
+[node name="Area2D" type="Area2D" parent="Deck" unique_id=137788229]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D" unique_id=485733197]
+shape = SubResource("RectangleShape2D_gkhac")
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck" unique_id=358916956]

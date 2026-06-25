@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Card
+
 signal hovered
 signal hovered_off
 
@@ -8,6 +10,7 @@ var starting_position
 @onready var sprite_front = $"CardImg"
 @onready var sprite_back = $PokerBack
 
+var memorized_z_index := 0
 
 
 # Called when the node enters the scene tree for the first time.
