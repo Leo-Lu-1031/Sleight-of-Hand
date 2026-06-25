@@ -11,7 +11,7 @@ var player_hand_reference
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	player_hand_reference = $"../PlayerHand"
+	player_hand_reference = get_parent()
 	
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -19,7 +19,7 @@ func _input(event):
 			var raycast_retval = raycast(Global.COLLISION_MASK_CARD)
 			if raycast_retval:
 				start_drag(raycast_retval)
-				raycast_retval[0].flip_card()
+				#raycast_retval[0].flip_card()
 		else:
 			if card_being_dragged:
 				finish_drag()
@@ -53,7 +53,7 @@ func get_card_with_highest_z_index(cards):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if card_being_dragged:
 		var mouse_pos = get_global_mouse_position() + card_rel_pos
 		card_being_dragged.position = Vector2(clamp(mouse_pos.x,0,screen_size.x),

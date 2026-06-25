@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
 [ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="3_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://r0ra2gvqkbs2" path="res://scenes/card.tscn" id="3_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/CardSlot.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://cv5wucd5pjexv" path="res://scripts/player_hand.gd" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://bc1ul2tent6r" path="res://scripts/deck.gd" id="5_tefeu"]
@@ -12,26 +11,26 @@
 [node name="Main" type="Node2D" unique_id=1141900535]
 
 [node name="CardSlot" parent="." unique_id=355683985 instance=ExtResource("4_tipki")]
-position = Vector2(298, 348)
+position = Vector2(875, 679)
 
-[node name="CardManager" type="Node2D" parent="." unique_id=863470049]
+[node name="Hand" type="Node2D" parent="." unique_id=1625243695]
+script = ExtResource("5_tbgi4")
+IS_AT_TOP = true
+SHOW_FRONT = true
+DECK_POS = Vector2(960, 540)
+
+[node name="CardManager" type="Node2D" parent="Hand" unique_id=863470049]
 script = ExtResource("3_jyhfs")
 
-[node name="Card" parent="CardManager" unique_id=1275946058 instance=ExtResource("3_o6xl0")]
-position = Vector2(554, 347)
-
-[node name="PlayerHand" type="Node2D" parent="." unique_id=1625243695]
-script = ExtResource("5_tbgi4")
-
-[node name="Deck" type="Node2D" parent="." unique_id=108655102]
+[node name="Deck" type="Node2D" parent="Hand" unique_id=108655102]
 script = ExtResource("5_tefeu")
 
-[node name="Area2D" type="Area2D" parent="Deck" unique_id=1359361790]
+[node name="Area2D" type="Area2D" parent="Hand/Deck" unique_id=1359361790]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D" unique_id=1904111822]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand/Deck/Area2D" unique_id=1904111822]
 shape = SubResource("RectangleShape2D_gkhac")
 
-[node name="Sprite2D" type="Sprite2D" parent="Deck" unique_id=1022428155]
+[node name="Sprite2D" type="Sprite2D" parent="Hand/Deck" unique_id=1022428155]
 
 [node name="Input Manager" type="Node2D" parent="." unique_id=58576845]
 script = ExtResource("6_tefeu")

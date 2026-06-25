@@ -7,15 +7,22 @@ const CARD_WIDTH = 100
 var center_screen_x
 var player_deck = []
 var player_hand = []
-var deck_position_x = 150
-var deck_position_y = 890
 var player_hand_reference
+
+# Set by parent
+var deck_position: Vector2
 
 @onready var CardManager = $"../CardManager"
 
+func set_deck_position(pos: Vector2):
+	deck_position = pos
+	position = pos
+	for i in range(player_deck.size()):
+		var card = player_deck[i]
+		card.position = deck_position - 2 * min(i,10) * Vector2(0, 1)
 	
 func _ready() -> void:
-	player_hand_reference = $"../PlayerHand"
+	player_hand_reference = get_parent()
 	center_screen_x = get_viewport().size.x / 2
 	
 	var card_scene = preload(CARD_SCENE_PATH)
@@ -34,10 +41,10 @@ func _ready() -> void:
 			CardManager.add_child(card)
 			card.name = file_name
 			
-			player_deck.append(card.name)
+			player_deck.append(card)
 
 			card.set_card_texture(texture)
-			card.position = Vector2(deck_position_x, deck_position_y - x * 2)
+			card.position = - Vector2(0, x*2)
 		if x < 10:	
 			x += 1
 	shuffle()
