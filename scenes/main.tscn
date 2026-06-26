@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
 [ext_resource type="PackedScene" uid="uid://bcy2d483fepkl" path="res://scenes/hand.tscn" id="2_sugp2"]
-[ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/CardSlot.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
 
 [node name="Main" type="Node2D" unique_id=1141900535]
@@ -10,11 +10,11 @@
 position = Vector2(875, 679)
 
 [node name="PlayerHand" parent="." unique_id=617236071 instance=ExtResource("2_sugp2")]
+SHOW_FRONT = true
 DECK_POS = Vector2(880, 540)
 
 [node name="EnemyHand" parent="." unique_id=1924767789 instance=ExtResource("2_sugp2")]
-IS_AT_TOP = false
-SHOW_FRONT = false
+IS_AT_TOP = true
 DECK_POS = Vector2(1040, 540)
 
 [node name="Input Manager" type="Node2D" parent="." unique_id=58576845]

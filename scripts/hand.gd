@@ -20,11 +20,11 @@ var hand_y_pos
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
 	var screen_size = get_viewport().size
-	center_screen_x = screen_size.x / 2
-	hand_y_pos = screen_size.y / 2 + (screen_size.y / 2 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_TOP else -1)
+	center_screen_x = screen_size.x / 2.0
+	hand_y_pos = screen_size.y / 2.0 + (screen_size.y / 2.0 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_TOP else -1)
 	Deck.set_deck_position(DECK_POS)
 		
-func add_card_to_hand(card):
+func add_card_to_hand(card: Card) -> void:
 	if card is Card:
 		if card not in hand_array:
 			hand_array.insert(0,card)
@@ -37,25 +37,25 @@ func add_card_to_hand(card):
 			animate_card_to_position(card,card.starting_position)
 		
 
-func update_hand_positions():
+func update_hand_positions() -> void:
 	for i in range(hand_array.size()):
 		var new_position = Vector2(calculate_card_position(i), hand_y_pos)
 		var card = hand_array[i]
-		print(hand_array)
+		print(self, hand_array)
 		card.starting_position = new_position
 		animate_card_to_position(card, new_position)
 		
 		
-func calculate_card_position(index):
+func calculate_card_position(index: int) -> float:
 	var total_width = (hand_array.size() - 1)*Global.CARD_WIDTH
 	var x_position = center_screen_x + index*Global.CARD_WIDTH - total_width/2.0
 	return x_position
 	
-func animate_card_to_position(card, new_position):
+func animate_card_to_position(card: Card, new_position: Vector2) -> void:
 	var tween = get_tree().create_tween()
 	tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_EXPO)
 
-func remove_card_from_hand(card):
+func remove_card_from_hand(card: Card) -> void:
 	if card in hand_array:
 		hand_array.erase(card)
 		update_hand_positions()
