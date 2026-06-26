@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dwga3uiians0p"]
+
+[ext_resource type="Script" uid="uid://bc1ul2tent6r" path="res://scripts/deck.gd" id="1_sdhao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tbgi4"]
+size = Vector2(171, 156)
+
+[node name="Deck" type="Node2D" unique_id=2087038754]
+script = ExtResource("1_sdhao")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1799971199]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=932905954]
+position = Vector2(75.5, 68)
+shape = SubResource("RectangleShape2D_tbgi4")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1853497831]

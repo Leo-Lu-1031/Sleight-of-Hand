@@ -1,4 +1,4 @@
-extends Node2D
+extends CardCollection
 class_name Deck
 
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
@@ -8,7 +8,7 @@ const CARD_WIDTH = 100
 var center_screen_x
 var deck_array = []
 var hand_array = []
-var hand_reference: Hand
+@export var hand_reference: Hand
 
 # Set by parent
 var deck_position: Vector2

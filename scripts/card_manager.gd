@@ -13,7 +13,6 @@ var hand_reference
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	hand_reference = get_parent()
-	
 
 func _input(event: InputEvent):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -52,7 +51,7 @@ func get_card_with_highest_z_index(cards: Array[Dictionary]) -> Card:
 			highest_z_card = current_card
 			highest_z_index = current_card.z_index
 	return highest_z_card
-			
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

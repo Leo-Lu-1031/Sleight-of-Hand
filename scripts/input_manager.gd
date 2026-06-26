@@ -1,4 +1,5 @@
 extends Node2D
+class_name InputManager
 
 var card_manager_reference: CardManager
 var deck_reference: Deck

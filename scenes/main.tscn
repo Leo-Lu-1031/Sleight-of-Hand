@@ -1,21 +1,33 @@
 [gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
 [ext_resource type="PackedScene" uid="uid://bcy2d483fepkl" path="res://scenes/hand.tscn" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="3_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
+[ext_resource type="PackedScene" uid="uid://dwga3uiians0p" path="res://scenes/deck.tscn" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
 
-[node name="Main" type="Node2D" unique_id=1141900535]
+[node name="Combat" type="Node2D" unique_id=1141900535]
+
+[node name="CardManager" type="Node2D" parent="." unique_id=498823519]
+script = ExtResource("3_jyhfs")
+
+[node name="Input Manager" type="Node2D" parent="CardManager" unique_id=58576845]
+script = ExtResource("6_tefeu")
 
 [node name="CardSlot" parent="." unique_id=355683985 instance=ExtResource("4_tipki")]
 position = Vector2(875, 679)
 
-[node name="PlayerHand" parent="." unique_id=617236071 instance=ExtResource("2_sugp2")]
+[node name="PlayerHand" parent="." unique_id=617236071 node_paths=PackedStringArray("Deck") instance=ExtResource("2_sugp2")]
 SHOW_FRONT = true
 DECK_POS = Vector2(880, 540)
+Deck = NodePath("../PlayerDeck")
+
+[node name="PlayerDeck" parent="." unique_id=2087038754 node_paths=PackedStringArray("hand_reference") instance=ExtResource("5_tbgi4")]
+hand_reference = NodePath("../PlayerHand")
 
 [node name="EnemyHand" parent="." unique_id=1924767789 instance=ExtResource("2_sugp2")]
 IS_AT_TOP = true
 DECK_POS = Vector2(1040, 540)
 
-[node name="Input Manager" type="Node2D" parent="." unique_id=58576845]
-script = ExtResource("6_tefeu")
+[node name="EnemyDeck" parent="." unique_id=539714442 node_paths=PackedStringArray("hand_reference") instance=ExtResource("5_tbgi4")]
+hand_reference = NodePath("../PlayerHand")
