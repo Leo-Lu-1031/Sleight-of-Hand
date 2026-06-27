@@ -1,30 +1,67 @@
 extends CardCollection
 class_name Deck
 
-const CARD_WIDTH = 100
+const CARD_WIDTH = 130
+const DECK_DISPLAY_COUNT = 5
+@export var EXPANSION_DIRECTION = Vector2(1,0)
 
 var center_screen_x
 
+var expanded = false
+
 # Set by parent
-var deck_position: Vector2
 
 func set_deck_position(pos: Vector2) -> void:
-	deck_position = pos
 	position = pos
-	for i in range(card_array.size()):
-		var card = card_array[i]
-		card.position = deck_position - 2 * min(i,10) * Vector2(0, 1)
+	render_deck()
 
 func shuffle() -> void:
 	card_array.shuffle()
 	
-#func draw(card: Card) -> void:
-	#hand_reference.add_card_to_hand(card)
-	#remove_card_from_deck(card)
+func peek() -> Card:
+	if len(card_array) == 0: return null
+	return card_array[0]
 
+func render_deck() -> void:
+	var tween = get_tree().create_tween()
+	for i in range(len(card_array)):
+		var card = card_array[i]
+		
+		
+		var new_position
+		if expanded:
+			new_position = position + EXPANSION_DIRECTION * CARD_WIDTH * i
+			card.get_node("Area2D/CollisionShape2D").disabled = false
+		else:
+			new_position = position - 20 * min(i,DECK_DISPLAY_COUNT-1) * Vector2(0, 1)
+			card.get_node("Area2D/CollisionShape2D").disabled = true
+			
+		tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.set_parallel()	
+		card.set_card_z_index(i*1.0/len(card_array))
+		
+		## Later target for optimization: Do not render cards at the bottom
+		#if i < DECK_DISPLAY_COUNT + 1:
+			#
+		
+func add_card(card: Card) -> void:
+	card_array.insert(0, card)
+	render_deck()
+	
 func remove_card(card: Card) -> void:
 	if card in card_array:
+		card.get_node("Area2D/CollisionShape2D").disabled = false
 		card_array.erase(card)
+		print(self, ' removed card ', card.name)
+		render_deck()
+		
+func toggle_expand() -> void:
+	expanded = !expanded
+	render_deck()
+	
+func set_expand(expand: bool) -> void:
+	expanded = expand
+	render_deck()
 
 """Unfinished - add update deck position here once done"""
 
@@ -34,3 +71,14 @@ func remove_card(card: Card) -> void:
 """Other code that allows to interact with the top of deck"""
 "Update Deck looks when something changes"
 "func draw card"
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if len(card_array) > 0:
+		var top: Card = card_array[0]
+		top.emit_signal('hovered', top)
+
+func _on_area_2d_mouse_exited() -> void:
+	if len(card_array) > 0:
+		var top: Card = card_array[0]
+		top.emit_signal('hovered_off', top)

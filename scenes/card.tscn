@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://r0ra2gvqkbs2"]
 
 [ext_resource type="Script" uid="uid://duq5i5iglxg63" path="res://scripts/card.gd" id="1_ktuci"]
+[ext_resource type="Texture2D" uid="uid://b7cew54tqvkly" path="res://assets/card_glow.png" id="2_kg30u"]
 [ext_resource type="Texture2D" uid="uid://b8hbksmgm28nu" path="res://assets/Cards_Folder/red_joker.png" id="2_ktuci"]
 [ext_resource type="Texture2D" uid="uid://tflm4ijcr3js" path="res://assets/Poker Back.png" id="3_sy11y"]
 
@@ -15,6 +16,10 @@ script = ExtResource("1_ktuci")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=989913656]
 shape = SubResource("RectangleShape2D_al6o5")
 
+[node name="Glow" type="Sprite2D" parent="." unique_id=456012049]
+scale = Vector2(0.118131034, 0.11532254)
+texture = ExtResource("2_kg30u")
+
 [node name="CardImg" type="Sprite2D" parent="." unique_id=795236220]
 position = Vector2(-7.6293945e-06, 0)
 scale = Vector2(0.185, 0.1776861)
@@ -24,6 +29,12 @@ texture = ExtResource("2_ktuci")
 position = Vector2(-1.9073486e-06, 0.100001335)
 scale = Vector2(0.12857142, 0.1257874)
 texture = ExtResource("3_sy11y")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1371731341]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+editor_only = false
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

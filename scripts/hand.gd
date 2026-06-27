@@ -3,7 +3,7 @@ class_name Hand
 
 const HAND_COUNT = 3
 
-@export var IS_AT_TOP = false
+@export var IS_AT_BOTTOM = false
 @export var SHOW_FRONT = false
 @export var DECK_POS: Vector2
 
@@ -14,10 +14,11 @@ var hand_y_pos
 func _ready() -> void:
 	var screen_size = get_viewport().size
 	center_screen_x = screen_size.x / 2.0
-	hand_y_pos = screen_size.y / 2.0 + (screen_size.y / 2.0 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_TOP else -1)
+	hand_y_pos = screen_size.y / 2.0 + (screen_size.y / 2.0 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_BOTTOM else -1)
 
 #@Override
 func add_card(card: Card) -> void:
+	print(self, ' adding card ', card.name)
 	if card is Card:
 		if card not in card_array:
 			card_array.insert(0,card)
@@ -34,7 +35,6 @@ func update_hand_positions() -> void:
 		var new_position = Vector2(calculate_card_position(i), hand_y_pos)
 		var card = card_array[i]
 		print(self, card_array)
-		card.starting_position = new_position
 		animate_card_to_position(card, new_position)
 		
 func calculate_card_position(index: int) -> float:

@@ -7,5 +7,8 @@ var card_array: Array[Card]
 func add_card(card: Card):
 	card_array.append(card)
 	
+func add_card_at(index: int, card: Card):
+	card_array.insert(index, card)
+	
 func remove_card(card: Card):
 	card_array.erase(card)

@@ -5,24 +5,30 @@ class_name Card
 signal hovered
 signal hovered_off
 
-var starting_position
+#var starting_position
+
+var is_selected: bool = false
+var is_hovered: bool = false
 
 @onready var sprite_front = $"CardImg"
 @onready var sprite_back = $PokerBack
+@onready var glow = $Glow
 
 var memorized_z_index := 0
+
+var card_owner: CardCollection
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	get_parent().connect_card_signals(self)
-	show_back()
+	show_front()
+	$"Glow".visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
 
 func _on_area_2d_mouse_entered() -> void:
 	emit_signal("hovered", self)
-
 
 func _on_area_2d_mouse_exited() -> void:
 	emit_signal("hovered_off", self)
@@ -47,3 +53,28 @@ func flip_card():
 		
 func set_card_texture(texture):
 	sprite_front.texture = texture
+
+func render():
+	scale = Vector2(1,1)
+	rotation = 0
+	if is_selected:
+		scale *= 1.1
+	glow.visible = is_selected
+	if is_hovered: 
+		scale *= 1.1
+		if z_index != 100: memorized_z_index = z_index
+		z_index = 100
+	else:
+		z_index = memorized_z_index
+	
+func set_select(selected: bool):
+	is_selected = selected
+	render()
+
+func set_hover(hovered: bool):
+	is_hovered = hovered
+	render()
+	
+func set_card_z_index(incoming_z_index: float):
+	memorized_z_index = incoming_z_index
+	render()
