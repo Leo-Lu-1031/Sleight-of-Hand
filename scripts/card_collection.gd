@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name CardCollection
 
 var card_array: Array[Card]

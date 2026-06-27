@@ -18,18 +18,30 @@ func _input(event: InputEvent) -> void:
 		else:
 			pass
 
-func raycast() -> Card:
+func raycast() -> Node2D:
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
 	parameters.collide_with_areas = true
 	var result = space_state.intersect_point(parameters)
 	if result:
-		if result[0].collider.collision_mask == Global.COLLISION_MASK_CARD:
-			var card_found: Card = card_manager_reference.get_card_with_highest_z_index(result)
-			if card_found in deck_reference.deck_array:
-				return card_found
-	return null
+		return get_node_with_highest_z_index(result)
+	else:
+		return null
+	
+func get_node_with_highest_z_index(nodes: Array[Dictionary]) -> Node2D:
+	var highest_z_node = null
+	var highest_z_index = -1
+	
+	for i in range(0, nodes.size()):
+		#prev code was:
+		#var current_card = cards[1].collider.get_parent()
+		var current_node = nodes[i].collider.get_parent()
+		if current_node.z_index > highest_z_index:
+			highest_z_node = current_node
+			highest_z_index = current_node.z_index
+	return highest_z_node
+
 """ This is somewhat werid since we have decided to use a different structure for our decks- which means that detection for different masking layer is unneeded
 I dont think that is too good
 Also in the future I need to decide whihc functions should go to which scripts.
