@@ -34,6 +34,7 @@ func _on_area_2d_mouse_entered() -> void:
 	emit_signal("hovered", self)
 
 func _on_area_2d_mouse_exited() -> void:
+	print('mouse exited ', self)
 	emit_signal("hovered_off", self)
 
 var showing_front := false
@@ -64,8 +65,7 @@ func render():
 		scale *= 1.1
 	glow.visible = is_selected
 	
-	if !is_selected and !is_selectible:
-		get_node('Area2D/CollisionShape2D').disabled = true
+	if !is_selectible:
 		fog.visible = true
 	else:
 		fog.visible = false
@@ -76,6 +76,8 @@ func render():
 		z_index = 100
 	else:
 		z_index = memorized_z_index
+		
+	print(scale, is_selected, is_selectible, is_hovered)
 	
 func set_select(selected: bool):
 	is_selected = selected

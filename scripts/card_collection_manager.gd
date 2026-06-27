@@ -51,8 +51,11 @@ func _ready() -> void:
 		print("Could not open folder: ", CARDS_FOLDER_PATH)
 		return
 	var files := dir.get_files()
-	var x := 0
-	for file_name in files:
+	var files_array: Array[String] = []
+	for file_name in files: files_array.append(file_name)
+	files_array.shuffle()
+	
+	for file_name in files_array:
 		if file_name.ends_with(".png"):
 			var image_path := CARDS_FOLDER_PATH + file_name
 			var texture := load(image_path)
@@ -68,6 +71,7 @@ func _ready() -> void:
 			card.card_owner = deck_in
 			
 	emit_signal("reset_selectible_cards", selected_cards)
+	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -96,8 +100,13 @@ func animate_auto_turn(auto_deck: Deck, auto_selected: Array[Card]):
 	selected_cards = auto_selected
 	play_cards()
 	emit_signal("played_cards", auto_deck, auto_selected)
-	var card_drawn: Card = draw_card(auto_deck)
-	emit_signal('end_turn', auto_deck, card_drawn)
+	# Ends turn after 1 second
+	get_tree().create_tween().tween_callback(
+		func (): 
+			var card_drawn: Card = draw_card(auto_deck)
+			emit_signal('end_turn', auto_deck, card_drawn)
+	).set_delay(1)
+	
 	
 func _on_input_manager_draw_card(deck: Deck) -> void:
 	if deck != current_turn_deck: return
@@ -125,5 +134,4 @@ func _on_input_manager_play_cards() -> void:
 	play_cards()
 
 func _on_logic_god_auto_play(auto_deck: Deck, played_cards: Array[Card]) -> void:
-	print('animating auto turn for ', auto_deck)
 	animate_auto_turn(auto_deck, played_cards)

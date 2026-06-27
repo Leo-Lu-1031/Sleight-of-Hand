@@ -52,7 +52,6 @@ func remove_card(card: Card) -> void:
 	if card in card_array:
 		card.get_node("Area2D/CollisionShape2D").disabled = false
 		card_array.erase(card)
-		print(self, ' removed card ', card.name)
 		render()
 		
 func toggle_expand() -> void:

@@ -19,8 +19,9 @@ func _input(event: InputEvent) -> void:
 				if node_found is Deck:
 					emit_signal("draw_card", node_found)
 				if node_found is Card:
-					emit_signal("toggle_card_select", node_found)
 					emit_signal("start_drag", node_found)
+					if node_found.is_selectible:
+						emit_signal("toggle_card_select", node_found)
 				if node_found is PlayCardButton:
 					emit_signal("play_cards")
 			else:

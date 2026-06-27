@@ -43,7 +43,7 @@ func _on_card_collection_manager_define_decks(decks: Array[Deck]) -> void:
 func _on_card_collection_manager_reset_selectible_cards(selected_cards: Array[Card]) -> void:
 	# Simple implementation where all cards are selectible except for the face cards
 	emit_signal("update_selectibles",
-		func(card: Card) -> bool: return ('jack' not in card.name and 'queen' not in card.name and 'king' not in card.name) or (card.card_owner is Deck and !card.card_owner.expanded))
+		func(card: Card) -> bool: return ('jack' not in card.name and 'queen' not in card.name and 'king' not in card.name))
 
 func _on_card_collection_manager_end_turn(current_deck: Deck, card_drawn: Card) -> void:
 	current_turn += 1
@@ -51,7 +51,6 @@ func _on_card_collection_manager_end_turn(current_deck: Deck, card_drawn: Card) 
 	var current_turn_deck = decks_in_play[current_turn]
 	emit_signal("update_turn", current_turn_deck)
 	if !current_turn_deck.PLAYER_DRAWABLE:
-		print("auto playing turn for", current_turn_deck)
 		emit_signal("auto_play", current_turn_deck, enemy_play_logic(current_turn_deck))
 
 

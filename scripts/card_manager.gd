@@ -22,11 +22,11 @@ func _on_input_manager_start_drag(card: Card) -> void:
 	var mouse_pos = get_global_mouse_position()
 	card_being_dragged = card
 	card_rel_pos = card.position - mouse_pos
-	card_being_dragged.scale = Vector2(1,1)
+	card_being_dragged.set_hover(false)
 	
 func _on_input_manager_end_drag() -> void:
 	if !card_being_dragged: return
-	card_being_dragged.scale = Vector2(1.05,1.05)
+	card_being_dragged.set_hover(true)
 	#var card_slot = raycast(Global.COLLISION_MASK_SLOT)
 	#if card_slot and !card_slot.card_in_slot:
 		#hand_reference.remove_card_from_hand(card_being_dragged)
