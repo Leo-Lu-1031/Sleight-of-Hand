@@ -1,13 +1,21 @@
 [gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
 
+[ext_resource type="PackedScene" uid="uid://ccvl4umv8offc" path="res://scenes/button.tscn" id="1_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://bcy2d483fepkl" path="res://scenes/hand.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="3_jyhfs"]
-[ext_resource type="Script" uid="uid://chp4t2udgyd6s" path="res://scenes/card_collection_manager.gd" id="4_tefeu"]
+[ext_resource type="Script" uid="uid://chp4t2udgyd6s" path="res://scripts/card_collection_manager.gd" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
 [ext_resource type="PackedScene" uid="uid://dwga3uiians0p" path="res://scenes/deck.tscn" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://vqm3g56g7ks5" path="res://scripts/logic_god.gd" id="5_tipki"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
 
 [node name="Combat" type="Node2D" unique_id=1141900535]
+
+[node name="UIManager" type="Node2D" parent="." unique_id=1599347455]
+z_index = 100
+position = Vector2(1573, 852)
+
+[node name="PlayCardButton" parent="UIManager" unique_id=870228585 instance=ExtResource("1_o6xl0")]
 
 [node name="InputManager" type="Node2D" parent="." unique_id=58576845]
 script = ExtResource("6_tefeu")
@@ -17,6 +25,9 @@ script = ExtResource("3_jyhfs")
 
 [node name="CardSlot" parent="." unique_id=355683985 instance=ExtResource("4_tipki")]
 position = Vector2(894, 363)
+
+[node name="LogicGod" type="Node2D" parent="." unique_id=1832189788]
+script = ExtResource("5_tipki")
 
 [node name="CardCollectionManager" type="Node2D" parent="." unique_id=632489518]
 script = ExtResource("4_tefeu")
@@ -29,6 +40,7 @@ DECK_POS = Vector2(880, 540)
 [node name="PlayerDeck" parent="CardCollectionManager" unique_id=2087038754 instance=ExtResource("5_tbgi4")]
 z_index = 200
 position = Vector2(960, 574)
+PLAYER_DRAWABLE = true
 
 [node name="EnemyHand" parent="CardCollectionManager" unique_id=1924767789 instance=ExtResource("2_sugp2")]
 DECK_POS = Vector2(1040, 540)
@@ -39,7 +51,15 @@ position = Vector2(827, 574)
 EXPANSION_DIRECTION = Vector2(-1, 0)
 
 [connection signal="draw_card" from="InputManager" to="CardCollectionManager" method="_on_input_manager_draw_card"]
-[connection signal="end_drag" from="InputManager" to="CardCollectionManager" method="_on_input_manager_end_drag"]
-[connection signal="start_drag" from="InputManager" to="CardCollectionManager" method="_on_input_manager_start_drag"]
+[connection signal="end_drag" from="InputManager" to="CardManager" method="_on_input_manager_end_drag"]
+[connection signal="play_cards" from="InputManager" to="CardCollectionManager" method="_on_input_manager_play_cards"]
+[connection signal="start_drag" from="InputManager" to="CardManager" method="_on_input_manager_start_drag"]
 [connection signal="toggle_card_select" from="InputManager" to="CardCollectionManager" method="_on_input_manager_toggle_card_select"]
 [connection signal="toggle_deck_expand" from="InputManager" to="CardCollectionManager" method="_on_input_manager_toggle_deck_expand"]
+[connection signal="auto_play" from="LogicGod" to="CardCollectionManager" method="_on_logic_god_auto_play"]
+[connection signal="update_selectibles" from="LogicGod" to="CardManager" method="_on_logic_god_update_selectibles"]
+[connection signal="update_turn" from="LogicGod" to="CardCollectionManager" method="_on_logic_god_update_turn"]
+[connection signal="define_decks" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_define_decks"]
+[connection signal="end_turn" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_end_turn"]
+[connection signal="played_cards" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_played_cards"]
+[connection signal="reset_selectible_cards" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_reset_selectible_cards"]

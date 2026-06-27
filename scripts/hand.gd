@@ -18,11 +18,10 @@ func _ready() -> void:
 
 #@Override
 func add_card(card: Card) -> void:
-	print(self, ' adding card ', card.name)
 	if card is Card:
 		if card not in card_array:
 			card_array.insert(0,card)
-			update_hand_positions()
+			render()
 			if !card.showing_front and SHOW_FRONT:
 				card.show_front()
 			if card.showing_front and !SHOW_FRONT:
@@ -30,11 +29,10 @@ func add_card(card: Card) -> void:
 		else:
 			animate_card_to_position(card,card.starting_position)
 
-func update_hand_positions() -> void:
+func render() -> void:
 	for i in range(card_array.size()):
 		var new_position = Vector2(calculate_card_position(i), hand_y_pos)
 		var card = card_array[i]
-		print(self, card_array)
 		animate_card_to_position(card, new_position)
 		
 func calculate_card_position(index: int) -> float:
@@ -50,4 +48,4 @@ func animate_card_to_position(card: Card, new_position: Vector2) -> void:
 func remove_card(card: Card) -> void:
 	if card in card_array:
 		card_array.erase(card)
-		update_hand_positions()
+		render()

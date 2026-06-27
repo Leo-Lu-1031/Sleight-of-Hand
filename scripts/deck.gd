@@ -4,6 +4,7 @@ class_name Deck
 const CARD_WIDTH = 130
 const DECK_DISPLAY_COUNT = 5
 @export var EXPANSION_DIRECTION = Vector2(1,0)
+@export var PLAYER_DRAWABLE = false
 
 var center_screen_x
 
@@ -13,7 +14,7 @@ var expanded = false
 
 func set_deck_position(pos: Vector2) -> void:
 	position = pos
-	render_deck()
+	render()
 
 func shuffle() -> void:
 	card_array.shuffle()
@@ -22,11 +23,10 @@ func peek() -> Card:
 	if len(card_array) == 0: return null
 	return card_array[0]
 
-func render_deck() -> void:
+func render() -> void:
 	var tween = get_tree().create_tween()
 	for i in range(len(card_array)):
 		var card = card_array[i]
-		
 		
 		var new_position
 		if expanded:
@@ -46,22 +46,22 @@ func render_deck() -> void:
 		
 func add_card(card: Card) -> void:
 	card_array.insert(0, card)
-	render_deck()
+	render()
 	
 func remove_card(card: Card) -> void:
 	if card in card_array:
 		card.get_node("Area2D/CollisionShape2D").disabled = false
 		card_array.erase(card)
 		print(self, ' removed card ', card.name)
-		render_deck()
+		render()
 		
 func toggle_expand() -> void:
 	expanded = !expanded
-	render_deck()
+	render()
 	
 func set_expand(expand: bool) -> void:
 	expanded = expand
-	render_deck()
+	render()
 
 """Unfinished - add update deck position here once done"""
 

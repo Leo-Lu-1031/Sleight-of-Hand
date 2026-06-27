@@ -30,11 +30,11 @@ position = Vector2(-1.9073486e-06, 0.100001335)
 scale = Vector2(0.12857142, 0.1257874)
 texture = ExtResource("3_sy11y")
 
-[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=1371731341]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-editor_only = false
+[node name="Fog" type="Sprite2D" parent="." unique_id=710621042]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-1, -6)
+scale = Vector2(0.10721063, 0.12046607)
+texture = ExtResource("2_kg30u")
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

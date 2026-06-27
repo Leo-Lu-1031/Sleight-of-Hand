@@ -25,6 +25,7 @@ func _on_input_manager_start_drag(card: Card) -> void:
 	card_being_dragged.scale = Vector2(1,1)
 	
 func _on_input_manager_end_drag() -> void:
+	if !card_being_dragged: return
 	card_being_dragged.scale = Vector2(1.05,1.05)
 	#var card_slot = raycast(Global.COLLISION_MASK_SLOT)
 	#if card_slot and !card_slot.card_in_slot:
@@ -32,8 +33,8 @@ func _on_input_manager_end_drag() -> void:
 		#card_being_dragged.position = card_slot.position
 		#card_being_dragged.get_node("Area2D/CollisionShape2D").disabled = true
 		#card_slot.card_in_slot = true
-	#else:
-		#hand_reference.add_card_to_hand(card_being_dragged)
+	
+	card_being_dragged.card_owner.render()
 	card_being_dragged = null
 	
 func connect_card_signals(card: Card) -> void:
@@ -51,5 +52,13 @@ func on_hovered_off_card(card: Card) -> void:
 			new_card_hovered.set_hover(true)
 		else:
 			is_hovering_on_card = false	
+			
 
+func _on_logic_god_update_selectibles(selectibility_func: Callable) -> void:
+	for card: Card in get_children():
+		card.set_selectible(selectibility_func.call(card))
+		
+	
+	
+	
 	

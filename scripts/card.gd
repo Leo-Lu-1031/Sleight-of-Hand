@@ -9,10 +9,12 @@ signal hovered_off
 
 var is_selected: bool = false
 var is_hovered: bool = false
+var is_selectible: bool = true
 
 @onready var sprite_front = $"CardImg"
 @onready var sprite_back = $PokerBack
 @onready var glow = $Glow
+@onready var fog = $Fog
 
 var memorized_z_index := 0
 
@@ -23,6 +25,7 @@ func _ready() -> void:
 	get_parent().connect_card_signals(self)
 	show_front()
 	$"Glow".visible = false
+	$"Fog".visible = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 	#pass
@@ -60,6 +63,13 @@ func render():
 	if is_selected:
 		scale *= 1.1
 	glow.visible = is_selected
+	
+	if !is_selected and !is_selectible:
+		get_node('Area2D/CollisionShape2D').disabled = true
+		fog.visible = true
+	else:
+		fog.visible = false
+		
 	if is_hovered: 
 		scale *= 1.1
 		if z_index != 100: memorized_z_index = z_index
@@ -69,6 +79,10 @@ func render():
 	
 func set_select(selected: bool):
 	is_selected = selected
+	render()
+	
+func set_selectible(selectible: bool):
+	is_selectible = selectible
 	render()
 
 func set_hover(hovered: bool):

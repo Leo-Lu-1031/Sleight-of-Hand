@@ -1,6 +1,7 @@
 extends Node2D
 class_name InputManager
 
+signal play_cards
 signal draw_card
 signal toggle_card_select
 signal toggle_deck_expand
@@ -20,13 +21,14 @@ func _input(event: InputEvent) -> void:
 				if node_found is Card:
 					emit_signal("toggle_card_select", node_found)
 					emit_signal("start_drag", node_found)
+				if node_found is PlayCardButton:
+					emit_signal("play_cards")
 			else:
 				emit_signal("end_drag")
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				var node_found = Global.raycast()
 				if node_found is Deck:
-					print("inputmanager attempting to expand ", node_found)
 					emit_signal("toggle_deck_expand", node_found)
 
 """ This is somewhat werid since we have decided to use a different structure 

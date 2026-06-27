@@ -18,18 +18,6 @@ shape = SubResource("RectangleShape2D_sdhao")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1853497831]
 
-[node name="PokerBack3" type="Sprite2D" parent="." unique_id=1299283722]
-visible = false
-position = Vector2(0, -10.000001)
-scale = Vector2(0.12607144, 0.12607142)
-texture = ExtResource("2_6rnap")
-
-[node name="PokerBack2" type="Sprite2D" parent="." unique_id=958554302]
-visible = false
-position = Vector2(0, -5)
-scale = Vector2(0.12607144, 0.12607142)
-texture = ExtResource("2_6rnap")
-
 [node name="PokerBack" type="Sprite2D" parent="." unique_id=528407054]
 visible = false
 position = Vector2(0, 2.9802322e-08)
