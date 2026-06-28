@@ -3,6 +3,8 @@ class_name CardCollection
 
 var card_array: Array[Card]
 var character_id: int # Need better suggestions
+var is_player: bool
+var is_alive: bool = true
 
 #Override these
 func add_card(card: Card):

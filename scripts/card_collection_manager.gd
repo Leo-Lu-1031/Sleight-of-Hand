@@ -38,10 +38,10 @@ var hand_deck_correspondence = {
 	}
 
 func _ready() -> void:
-	initializing_characters(players, enemies)
+	initialize_characters(players, enemies)
 	load_cards()
 
-func initializing_characters(players,enemies): # Something about shadowing
+func initialize_characters(players,enemies): # Something about shadowing
 	# There probably is a thousand ways to make this look more elegant
 	var x = 0
 	var hand_scene = preload(HAND_SCENE_PATH)
