@@ -22,21 +22,14 @@ var current_turn_deck: Deck
 var selected_cards: Array[Card]
 
 # Temporary Solution
+
 var hand_deck_correspondence = {
-	'PlayerHand': 'PlayerDeck',
+	'PlayerHand': 'PlayerDiscard',
 	'PlayerDeck': 'PlayerHand',
 	'EnemyHand': 'EnemyDeck',
-	'EnemyDeck': 'EnemyHand'
-}
+	'EnemyDeck': 'EnemyHand',
+	}
 
-func chown(card: Card, newOwner: CardCollection) -> void:
-	var prev = card.card_owner
-	if prev:
-		prev.remove_card(card)
-	newOwner.add_card(card)
-	card.card_owner = newOwner
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	card_manager = $'../CardManager'
 	decks = []
@@ -83,9 +76,13 @@ func _ready() -> void:
 	emit_signal("reset_selectible_cards", selected_cards)
 	pass
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+
+func chown(card: Card, newOwner: CardCollection) -> void:
+	var prev = card.card_owner
+	if prev:
+		prev.remove_card(card)
+	newOwner.add_card(card)
+	card.card_owner = newOwner
 	
 func draw_card(deck: Deck) -> Card:
 	var card = deck.peek()
@@ -97,8 +94,9 @@ func draw_card(deck: Deck) -> Card:
 func play_cards() -> void:
 	for card in selected_cards:
 		if not card: continue
+		chown(card, $PlayerDiscard) # Lets keep it like this for now
+		card.set_select(false)
 		card.card_owner.remove_card(card)
-		card.visible = false
 	selected_cards = []
 	emit_signal("reset_selectible_cards", selected_cards)
 	
