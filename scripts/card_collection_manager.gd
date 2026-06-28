@@ -13,6 +13,7 @@ signal end_turn
 
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const CARDS_FOLDER_PATH = "res://assets/Cards_Folder/"
+const CARD_TOOLTIPS_PATH = "res://texts/card_hover_tooltips.json"
 
 var card_manager: CardManager
 var decks: Array[Deck]
@@ -46,6 +47,12 @@ func _ready() -> void:
 	
 	var card_scene = preload(CARD_SCENE_PATH)
 	var dir := DirAccess.open(CARDS_FOLDER_PATH)
+	
+	var tooltips_file = FileAccess.open(CARD_TOOLTIPS_PATH, FileAccess.READ)
+	print(tooltips_file)
+	var tooltips_str: String = tooltips_file.get_as_text()
+	
+	var tooltips: Dictionary = JSON.parse_string(tooltips_str)
 
 	if dir == null:
 		print("Could not open folder: ", CARDS_FOLDER_PATH)
@@ -62,6 +69,9 @@ func _ready() -> void:
 			var card: Card = card_scene.instantiate()
 			#card.set_card_texture(texture)
 			card.get_node('CardImg').texture = texture
+			card.set_card_tooltips(
+				tooltips[file_name] if file_name in tooltips else tooltips['default']
+			)
 			card.name = file_name
 
 			card_manager.add_child(card)
@@ -105,7 +115,7 @@ func animate_auto_turn(auto_deck: Deck, auto_selected: Array[Card]):
 		func (): 
 			var card_drawn: Card = draw_card(auto_deck)
 			emit_signal('end_turn', auto_deck, card_drawn)
-	).set_delay(1)
+	).set_delay(0.3)
 	
 	
 func _on_input_manager_draw_card(deck: Deck) -> void:

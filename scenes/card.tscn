@@ -36,5 +36,12 @@ position = Vector2(-1, -6)
 scale = Vector2(0.10721063, 0.12046607)
 texture = ExtResource("2_kg30u")
 
+[node name="Tooltips" type="RichTextLabel" parent="." unique_id=56860741]
+offset_left = -40.0
+offset_top = -137.0
+offset_right = 41.0
+offset_bottom = -75.0
+vertical_alignment = 2
+
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

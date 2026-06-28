@@ -57,6 +57,9 @@ func flip_card():
 		
 func set_card_texture(texture):
 	sprite_front.texture = texture
+	
+func set_card_tooltips(tooltips: String):
+	get_node('Tooltips').text = tooltips
 
 func render():
 	scale = Vector2(1,1)
@@ -76,6 +79,8 @@ func render():
 		z_index = 100
 	else:
 		z_index = memorized_z_index
+		
+	get_node("Tooltips").visible = is_hovered
 		
 	print(scale, is_selected, is_selectible, is_hovered)
 	

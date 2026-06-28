@@ -1,0 +1,7 @@
+{
+	"jack_of_clubs.png": "Tooltip 1",
+	"jack_of_hearts.png": "Tooltip 2",
+	"jack_of_diamonds.png": "Tooltip 3",
+	"jack_of_spades.png": "Tooltip 4",
+	"default": "default_tooltip"
+}
