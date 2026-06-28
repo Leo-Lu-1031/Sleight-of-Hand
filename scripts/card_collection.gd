@@ -2,6 +2,7 @@ extends Node2D
 class_name CardCollection
 
 var card_array: Array[Card]
+var character_id: int # Need better suggestions
 
 #Override these
 func add_card(card: Card):

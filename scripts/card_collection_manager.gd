@@ -31,13 +31,16 @@ var hand_deck_correspondence = {
 	}
 
 func _ready() -> void:
+	
+	load_cards()
+
+func load_cards():
 	card_manager = $'../CardManager'
 	decks = []
 	for node in get_children():
 		if node is Deck: decks.append(node)
 	emit_signal("define_decks", decks)
 	current_turn_deck = decks[0]
-	
 	var card_scene = preload(CARD_SCENE_PATH)
 	var dir := DirAccess.open(CARDS_FOLDER_PATH)
 	
