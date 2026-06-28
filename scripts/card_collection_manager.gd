@@ -30,12 +30,7 @@ var enemies: int
 
 # Temporary Solution
 
-var hand_deck_correspondence = {
-	'PlayerHand': 'PlayerDiscard',
-	'PlayerDeck': 'PlayerHand',
-	'EnemyHand': 'EnemyDeck',
-	'EnemyDeck': 'EnemyHand',
-	}
+var character_by_id:= {}
 
 func _ready() -> void:
 	initialize_characters(players, enemies)
@@ -47,7 +42,13 @@ func initialize_characters(players,enemies): # Something about shadowing
 	var hand_scene = preload(HAND_SCENE_PATH)
 	var deck_scene = preload(DECK_SCENE_PATH)
 	var discard_scene = preload(DISCARD_SCENE_PATH)
+<<<<<<< Updated upstream
 	for player in players:
+=======
+	for player in players: 
+		# Here we should use a for loop
+		# Instaniate, character_id, character_id dictionary, is_player	
+>>>>>>> Stashed changes
 		var hand: CardCollection = hand_scene.instantiate()
 		var deck: CardCollection = deck_scene.instantiate()
 		var discard: CardCollection = discard_scene.instantiate()
@@ -57,6 +58,11 @@ func initialize_characters(players,enemies): # Something about shadowing
 		hand.is_player = true
 		deck.is_player = true
 		discard.is_player = true
+<<<<<<< Updated upstream
+=======
+		var combatants_by_id[x] = "player_hand_{id_num}".format({id_num = x})
+		
+>>>>>>> Stashed changes
 		x += 1
 	for enemy in enemies:
 		var hand: CardCollection = hand_scene.instantiate()
@@ -70,6 +76,10 @@ func initialize_characters(players,enemies): # Something about shadowing
 		discard.is_player = false
 		x += 1
 	x = 0
+<<<<<<< Updated upstream
+=======
+	
+>>>>>>> Stashed changes
 
 func load_cards():
 	card_manager = $'../CardManager'
