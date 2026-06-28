@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b2spkxv2f6tdi"]
+
+[ext_resource type="Script" uid="uid://c3bj7ld7dqslk" path="res://scripts/discard.gd" id="1_m1mm0"]
+[ext_resource type="Texture2D" uid="uid://tflm4ijcr3js" path="res://assets/Poker Back.png" id="2_cyn56"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdhao"]
+size = Vector2(90.5, 127.5)
+
+[node name="Discard" type="Node2D" unique_id=2087038754]
+z_index = 100
+script = ExtResource("1_m1mm0")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1799971199]
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" unique_id=609509967]
+shape = SubResource("RectangleShape2D_sdhao")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1853497831]
+
+[node name="PokerBack" type="Sprite2D" parent="." unique_id=528407054]
+visible = false
+position = Vector2(0, 2.9802322e-08)
+scale = Vector2(0.12607144, 0.12607142)
+texture = ExtResource("2_cyn56")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

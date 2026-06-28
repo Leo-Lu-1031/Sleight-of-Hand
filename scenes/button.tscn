@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ccvl4umv8offc"]
+
+[ext_resource type="Script" uid="uid://bhs6g26jmqg0k" path="res://scripts/button.gd" id="1_mi6dp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ytui5"]
+radius = 52.0
+height = 234.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ytui5"]
+font_size = 37
+
+[node name="Button" type="Node2D" unique_id=870228585]
+script = ExtResource("1_mi6dp")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2077956440]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=221114609]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_ytui5")
+
+[node name="Label" type="Label" parent="." unique_id=106911769]
+offset_left = -92.0
+offset_top = -31.0
+offset_right = 98.434784
+offset_bottom = 29.0
+text = "Play Card"
+label_settings = SubResource("LabelSettings_ytui5")
+horizontal_alignment = 1
+vertical_alignment = 1

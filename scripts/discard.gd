@@ -1,5 +1,5 @@
 extends CardCollection
-class_name Deck
+class_name Discard
 
 const CARD_WIDTH = 130
 const DECK_DISPLAY_COUNT = 5
@@ -16,8 +16,8 @@ func set_deck_position(pos: Vector2) -> void:
 	position = pos
 	render()
 
-func shuffle() -> void:
-	card_array.shuffle()
+#func shuffle() -> void:
+#	card_array.shuffle()
 	
 func peek() -> Card:
 	if len(card_array) == 0: return null
