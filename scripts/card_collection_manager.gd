@@ -15,11 +15,18 @@ const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const CARDS_FOLDER_PATH = "res://assets/Cards_Folder/"
 const CARD_TOOLTIPS_PATH = "res://texts/card_hover_tooltips.json"
 
+const HAND_SCENE_PATH = "res://scenes/hand.tscn"
+const DECK_SCENE_PATH = "res://scenes/deck.tscn"
+const DISCARD_SCENE_PATH = "res://scenes/discard.tscn"
+
 var card_manager: CardManager
 var decks: Array[Deck]
 var current_turn_deck: Deck
 
 var selected_cards: Array[Card]
+
+var players: int
+var enemies: int
 
 # Temporary Solution
 
@@ -31,8 +38,38 @@ var hand_deck_correspondence = {
 	}
 
 func _ready() -> void:
-	
+	initializing_characters(players, enemies)
 	load_cards()
+
+func initializing_characters(players,enemies): # Something about shadowing
+	# There probably is a thousand ways to make this look more elegant
+	var x = 0
+	var hand_scene = preload(HAND_SCENE_PATH)
+	var deck_scene = preload(DECK_SCENE_PATH)
+	var discard_scene = preload(DISCARD_SCENE_PATH)
+	for player in players:
+		var hand: CardCollection = hand_scene.instantiate()
+		var deck: CardCollection = deck_scene.instantiate()
+		var discard: CardCollection = discard_scene.instantiate()
+		hand.character_id = x
+		deck.character_id = x
+		discard.character_id = x
+		hand.is_player = true
+		deck.is_player = true
+		discard.is_player = true
+		x += 1
+	for enemy in enemies:
+		var hand: CardCollection = hand_scene.instantiate()
+		var deck: CardCollection = deck_scene.instantiate()
+		var discard: CardCollection = discard_scene.instantiate()
+		hand.character_id = x
+		deck.character_id = x
+		discard.character_id = x
+		hand.is_player = false
+		deck.is_player = false
+		discard.is_player = false
+		x += 1
+	x = 0
 
 func load_cards():
 	card_manager = $'../CardManager'
