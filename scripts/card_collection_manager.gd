@@ -130,7 +130,7 @@ func _on_input_manager_toggle_card_select(card: Card) -> void:
 	else:
 		card.set_select(true)
 		selected_cards.append(card)
-	emit_signal("reset_selectible_cards", selected_cards)
+	reset_selectible_cards.emit(selected_cards)
 
 func _on_input_manager_toggle_deck_expand(deck: Deck) -> void:
 	deck.toggle_expand()
