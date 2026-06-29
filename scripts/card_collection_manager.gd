@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name CardCollectorManager
 
 signal reset_selectible_cards

@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name CardManager
 
 var is_hovering_on_card: bool
