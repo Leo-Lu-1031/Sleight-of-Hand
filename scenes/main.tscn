@@ -2,14 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://ccvl4umv8offc" path="res://scenes/button.tscn" id="1_o6xl0"]
 [ext_resource type="Script" uid="uid://dkl723o4qdh8y" path="res://scripts/combat_scene.gd" id="1_trceg"]
-[ext_resource type="PackedScene" uid="uid://bcy2d483fepkl" path="res://scenes/hand.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://chp4t2udgyd6s" path="res://scripts/card_collection_manager.gd" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
-[ext_resource type="PackedScene" uid="uid://dwga3uiians0p" path="res://scenes/deck.tscn" id="5_tbgi4"]
 [ext_resource type="Script" uid="uid://vqm3g56g7ks5" path="res://scripts/logic_god.gd" id="5_tipki"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
-[ext_resource type="PackedScene" uid="uid://b2spkxv2f6tdi" path="res://scenes/discard.tscn" id="9_85g3d"]
 [ext_resource type="PackedScene" uid="uid://dgyydx4ewcj6c" path="res://scenes/player.tscn" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://biqj8sxfxpbkr" path="res://assets/Isometric/block_E.png" id="123_1xgl0"]
 [ext_resource type="Texture2D" uid="uid://c6mrmpf1fohpy" path="res://assets/Isometric/floor_E.png" id="246_wa02r"]
@@ -86,30 +83,6 @@ script = ExtResource("5_tipki")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("4_tefeu")
-
-[node name="PlayerHand" parent="CombatScene/CardCollectionManager" unique_id=617236071 instance=ExtResource("2_sugp2")]
-IS_AT_BOTTOM = true
-SHOW_FRONT = true
-DECK_POS = Vector2(880, 540)
-
-[node name="PlayerDeck" parent="CombatScene/CardCollectionManager" unique_id=2087038754 instance=ExtResource("5_tbgi4")]
-z_index = 200
-position = Vector2(1042, 574)
-PLAYER_DRAWABLE = true
-
-[node name="PlayerDiscard" parent="CombatScene/CardCollectionManager" unique_id=615566723 instance=ExtResource("9_85g3d")]
-position = Vector2(1260, 574)
-
-[node name="EnemyHand" parent="CombatScene/CardCollectionManager" unique_id=1924767789 instance=ExtResource("2_sugp2")]
-DECK_POS = Vector2(1040, 540)
-
-[node name="EnemyDeck" parent="CombatScene/CardCollectionManager" unique_id=539714442 instance=ExtResource("5_tbgi4")]
-z_index = 200
-position = Vector2(742, 574)
-EXPANSION_DIRECTION = Vector2(-1, 0)
-
-[node name="EnemyDiscard" parent="CombatScene/CardCollectionManager" unique_id=1307963111 instance=ExtResource("9_85g3d")]
-position = Vector2(500, 574)
 
 [connection signal="draw_card" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_draw_card"]
 [connection signal="end_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_end_drag"]

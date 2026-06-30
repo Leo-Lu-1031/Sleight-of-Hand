@@ -11,9 +11,9 @@ var center_screen_x
 var expanded = false
 
 # Set by parent
-
-func set_deck_position(pos: Vector2) -> void:
-	position = pos
+func _ready() -> void:
+	if is_player:
+		PLAYER_DRAWABLE = true
 	render()
 
 func shuffle() -> void:
