@@ -63,6 +63,7 @@ func initialize_characters(players,enemies) -> void: # Something about shadowing
 			add_child(collection)
 			collection.character_id = x
 			collection.is_player = true
+			print(collection.is_player)
 			collection.zone_type = zone["name"]
 			collection.set_to_screen_position()
 			player_zone_dict[zone["name"]] = collection
@@ -76,7 +77,6 @@ func initialize_characters(players,enemies) -> void: # Something about shadowing
 			collection.character_id = x
 			collection.is_player = false
 			collection.zone_type = zone["name"]
-			collection.set_to_screen_position()
 			player_zone_dict[zone["name"]] = collection
 		zones_by_character_id[x] = player_zone_dict
 		x += 1
@@ -176,8 +176,7 @@ func animate_auto_turn(auto_character_id: int, auto_selected: Array[Card]):
 	
 func _on_input_manager_draw_card(character_id: int) -> void:
 	var deck = zones_by_character_id[character_id]["deck"]
-
-	# if deck != current_turn_deck: return FIX LATER
+	if deck != current_turn_deck: return
 	var card_drawn: Card = draw_card(character_id)
 	selected_cards = []
 	emit_signal("reset_selectible_cards", selected_cards)

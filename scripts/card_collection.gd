@@ -16,7 +16,6 @@ var position_transformations := [
 func set_to_screen_position() -> void:
 	position = position_transformations[character_id][zone_type]
 	
-	
 func add_card(card: Card):
 	card_array.append(card)
 	

@@ -22,6 +22,7 @@ script = ExtResource("6_tefeu")
 script = ExtResource("3_jyhfs")
 
 [node name="CardSlot" parent="." unique_id=355683985 instance=ExtResource("4_tipki")]
+visible = false
 position = Vector2(894, 363)
 
 [node name="LogicGod" type="Node2D" parent="." unique_id=1832189788]
