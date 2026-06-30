@@ -27,9 +27,9 @@ var selected_cards: Array[Card]
 
 var players:= 1
 var enemies:= 1
-var hand_scene = preload(HAND_SCENE_PATH)
-var deck_scene = preload(DECK_SCENE_PATH)
-var discard_scene = preload(DISCARD_SCENE_PATH)
+var hand_scene: Resource = preload(HAND_SCENE_PATH)
+var deck_scene: Resource = preload(DECK_SCENE_PATH)
+var discard_scene: Resource = preload(DISCARD_SCENE_PATH)
 'CONSISTENCY ISSUE 
 what does character, zone, combatant etc each mean'
 
@@ -44,11 +44,7 @@ var zones_by_character_id = {
 	}
 }
 '
-var zone_defs := [
-	{"name": "hand", "scene": hand_scene},
-	{"name": "deck", "scene": deck_scene},
-	{"name": "discard", "scene": discard_scene}
-]
+var zone_defs := [hand_scene, deck_scene, discard_scene]
 
 func _ready() -> void:
 	initialize_characters(players, enemies)
@@ -57,28 +53,33 @@ func _ready() -> void:
 func initialize_characters(players,enemies) -> void: # Something about shadowing
 	var x = 0
 	for player in players: 
-		var player_zone_dict = {}
-		for zone in zone_defs:
-			var collection: CardCollection = zone["scene"].instantiate()
+		var player_zones: Array[CardCollection]
+		for zone in Global.card_collection_types.values():
+			print(zone)
+			var zone_type: Resource = zone_defs[zone]
+			var collection: CardCollection = zone_defs[zone].instantiate()
 			add_child(collection)
+			
 			collection.character_id = x
 			collection.is_player = true
-			collection.zone_type = zone["name"]
+			collection.zone_type = zone
 			collection.set_to_screen_position()
-			player_zone_dict[zone["name"]] = collection
-		zones_by_character_id[x] = player_zone_dict
+			player_zones.append(collection)
+		zones_by_character_id[x] = player_zones
 		x += 1
 	for enemy in enemies:
-		var player_zone_dict = {}
-		for zone in zone_defs:
-			var collection: CardCollection = zone["scene"].instantiate()
+		var enemy_zones = []
+		for zone in Global.card_collection_types.values():
+			var zone_type: Resource = zone_defs[zone]
+			var collection: CardCollection = zone_defs[zone].instantiate()
 			add_child(collection)
+			
 			collection.character_id = x
 			collection.is_player = false
-			collection.zone_type = zone["name"]
+			collection.zone_type = zone
 			collection.set_to_screen_position()
-			player_zone_dict[zone["name"]] = collection
-		zones_by_character_id[x] = player_zone_dict
+			enemy_zones.append(collection)
+		zones_by_character_id[x] = enemy_zones
 		x += 1
 	x = 0
 	print(zones_by_character_id)
@@ -156,7 +157,6 @@ func play_cards() -> void:
 		card.card_owner.remove_card(card)
 	selected_cards = []
 	emit_signal("reset_selectible_cards", selected_cards)
-	
 		
 func animate_auto_turn(auto_character_id: int, auto_selected: Array[Card]):
 	assert(selected_cards == [])
