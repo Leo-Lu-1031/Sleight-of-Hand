@@ -1,7 +1,10 @@
-[gd_resource type="Resource" format=3 uid="uid://dlpsu4vohm3pn"]
+[gd_resource type="Resource" script_class="CardResource" format=3 uid="uid://dme3u7s1adqso"]
 
-[ext_resource type="Script" uid="uid://b6oms3ah5gvi2" path="res://resources/cards/big_joker/big_joker.gd" id="1_acwmv"]
+[ext_resource type="Script" uid="uid://dg20pikb6soyb" path="res://resource_templates/card_resource.gd" id="1_acwmv"]
+[ext_resource type="Texture2D" uid="uid://va0x1vavmcxk" path="res://assets/Cards_Folder/black_joker.png" id="2_wniai"]
 
 [resource]
 script = ExtResource("1_acwmv")
+texture = ExtResource("2_wniai")
+tooltips = "big"
 metadata/_custom_type_script = "uid://dg20pikb6soyb"

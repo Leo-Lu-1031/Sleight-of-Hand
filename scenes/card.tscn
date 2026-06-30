@@ -16,7 +16,25 @@ script = ExtResource("1_ktuci")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=989913656]
 shape = SubResource("RectangleShape2D_al6o5")
 
-[node name="Glow" type="Sprite2D" parent="." unique_id=456012049]
+[node name="Unselectible" type="Sprite2D" parent="." unique_id=456012049]
+modulate = Color(0, 0, 0, 1)
+scale = Vector2(0.118131034, 0.11532254)
+texture = ExtResource("2_kg30u")
+
+[node name="Primary" type="Sprite2D" parent="." unique_id=989998420]
+visible = false
+scale = Vector2(0.118131034, 0.11532254)
+texture = ExtResource("2_kg30u")
+
+[node name="Cost" type="Sprite2D" parent="." unique_id=1422020867]
+visible = false
+modulate = Color(1, 1, 0, 1)
+scale = Vector2(0.118131034, 0.11532254)
+texture = ExtResource("2_kg30u")
+
+[node name="Target" type="Sprite2D" parent="." unique_id=1870841470]
+visible = false
+self_modulate = Color(1, 0, 1, 1)
 scale = Vector2(0.118131034, 0.11532254)
 texture = ExtResource("2_kg30u")
 
@@ -29,12 +47,6 @@ texture = ExtResource("2_ktuci")
 position = Vector2(-1.9073486e-06, 0.100001335)
 scale = Vector2(0.12857142, 0.1257874)
 texture = ExtResource("3_sy11y")
-
-[node name="Fog" type="Sprite2D" parent="." unique_id=710621042]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-1, -6)
-scale = Vector2(0.10721063, 0.12046607)
-texture = ExtResource("2_kg30u")
 
 [node name="Tooltips" type="RichTextLabel" parent="." unique_id=56860741]
 offset_left = -40.0

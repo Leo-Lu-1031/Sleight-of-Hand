@@ -1,1 +1,1 @@
-extends Card
+extends CardResource

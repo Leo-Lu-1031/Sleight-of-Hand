@@ -2,53 +2,39 @@ extends CardCollection
 class_name Hand
 
 const HAND_COUNT = 3
+const CARD_MARGINS = 20
 
-@export var IS_AT_BOTTOM = false
 @export var SHOW_FRONT = false
-@export var DECK_POS: Vector2
-
-var center_screen_x
-var hand_y_pos
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
-	initiate_hand_pos()
 	render()
-	
-func initiate_hand_pos():
-	print(self,is_player)
-	var screen_size = get_viewport().size
-	center_screen_x = screen_size.x / 2.0
-	hand_y_pos = screen_size.y / 2.0 + (screen_size.y / 2.0 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_BOTTOM else -1)
-
 
 #@Override
 func add_card(card: Card) -> void:
 	if card is Card:
-		if card not in card_array:
-			card_array.insert(0,card)
-			render()
-			if !card.showing_front and SHOW_FRONT:
-				card.show_front()
-			if card.showing_front and !SHOW_FRONT:
-				card.show_back()
-		else:
-			animate_card_to_position(card,card.starting_position)
+		card_array.insert(0,card)
+		if !card.showing_front and SHOW_FRONT:
+			card.show_front()
+		if card.showing_front and !SHOW_FRONT:
+			card.show_back()
+		render()
 
 func render() -> void:
-	for i in range(card_array.size()):
-		var new_position = Vector2(calculate_card_position(i), hand_y_pos)
-		var card = card_array[i]
-		animate_card_to_position(card, new_position)
-		
-func calculate_card_position(index: int) -> float:
-	var total_width = (card_array.size() - 1)*Global.CARD_WIDTH
-	var x_position = center_screen_x + index*Global.CARD_WIDTH - total_width/2.0
-	return x_position
+	if len(card_array) == 0: return
 	
-func animate_card_to_position(card: Card, new_position: Vector2) -> void:
 	var tween = get_tree().create_tween()
-	tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_EXPO)
+	for i in range(len(card_array)):
+		var card = card_array[i]
+		var new_position = calculate_card_position(i)
+			
+		tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.set_parallel()	
+		
+func calculate_card_position(index: int) -> Vector2:
+	var total_width = (card_array.size() - 1)*(Global.CARD_WIDTH+CARD_MARGINS)
+	var x_position = index*(Global.CARD_WIDTH+CARD_MARGINS) - total_width/2.0
+	return position + Vector2(x_position, 0)
 
 #@Override
 func remove_card(card: Card) -> void:

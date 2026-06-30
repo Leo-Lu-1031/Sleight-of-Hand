@@ -3,8 +3,7 @@ class_name Deck
 
 const CARD_WIDTH = 130
 const DECK_DISPLAY_COUNT = 5
-@export var EXPANSION_DIRECTION = Vector2(1,0)
-@export var PLAYER_DRAWABLE = false
+@export var EXPANSION_DIRECTION = Vector2(-1,0)
 
 var center_screen_x
 
@@ -12,8 +11,6 @@ var expanded = false
 
 # Set by parent
 func _ready() -> void:
-	if is_player:
-		PLAYER_DRAWABLE = true
 	render()
 
 func shuffle() -> void:
@@ -24,6 +21,8 @@ func peek() -> Card:
 	return card_array[0]
 
 func render() -> void:
+	if len(card_array) == 0: return
+	
 	var tween = get_tree().create_tween()
 	for i in range(len(card_array)):
 		var card = card_array[i]
@@ -38,7 +37,7 @@ func render() -> void:
 			
 		tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tween.set_parallel()	
-		card.memorized_z_index = i*1.0/len(card_array)
+		card.set_card_z_index(100*(1-i/len(card_array)))
 		
 		## Later target for optimization: Do not render cards at the bottom
 		#if i < DECK_DISPLAY_COUNT + 1:

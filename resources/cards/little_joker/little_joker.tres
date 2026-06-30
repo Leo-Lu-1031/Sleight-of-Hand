@@ -1,7 +1,10 @@
-[gd_resource type="Resource" format=3 uid="uid://c868200l7wuci"]
+[gd_resource type="Resource" format=3 uid="uid://dh15o4gnssfkv"]
 
 [ext_resource type="Script" uid="uid://bq585lgj1lpi0" path="res://resources/cards/little_joker/little_joker.gd" id="1_sptm4"]
+[ext_resource type="Texture2D" uid="uid://b8hbksmgm28nu" path="res://assets/Cards_Folder/red_joker.png" id="2_lhxbo"]
 
 [resource]
 script = ExtResource("1_sptm4")
+texture = ExtResource("2_lhxbo")
+tooltips = "little"
 metadata/_custom_type_script = "uid://dg20pikb6soyb"

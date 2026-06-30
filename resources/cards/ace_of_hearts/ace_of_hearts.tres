@@ -1,0 +1,10 @@
+[gd_resource type="Resource" format=3 uid="uid://crskn2gxtrca5"]
+
+[ext_resource type="Script" uid="uid://xynrtnspep4t" path="res://resources/cards/ace_of_hearts/ace_of_hearts.gd" id="1_d8wmi"]
+[ext_resource type="Texture2D" uid="uid://drortqm0uora7" path="res://assets/Cards_Folder/ace_of_hearts.png" id="2_8rsw1"]
+
+[resource]
+script = ExtResource("1_d8wmi")
+texture = ExtResource("2_8rsw1")
+tooltips = "spends one card to discard one enemy card"
+metadata/_custom_type_script = "uid://dg20pikb6soyb"

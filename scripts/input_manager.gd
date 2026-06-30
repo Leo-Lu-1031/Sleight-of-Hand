@@ -1,8 +1,7 @@
-extends Control
+extends Node
 class_name InputManager
 
-signal play_cards()
-signal toggle_card_select(card: Card)
+signal play_cards_button()
 signal start_drag(card: Card)
 signal end_drag()
 
@@ -18,10 +17,9 @@ func _input(event: InputEvent) -> void:
 					Events.draw_card.emit(node_found)
 				if node_found is Card:
 					start_drag.emit(node_found)
-					if node_found.is_selectible:
-						toggle_card_select.emit(node_found)
-				if node_found is PlayCardButton:
-					play_cards.emit()
+					Events.card_select_toggle.emit(node_found)
+				if node_found is PlayCardsButton:
+					play_cards_button.emit()
 			else:
 				end_drag.emit()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:

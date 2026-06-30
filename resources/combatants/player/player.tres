@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dg20pikb6soyb" path="res://resource_templates/card_resource.gd" id="1_onl1p"]
 [ext_resource type="Script" uid="uid://c0er5a5ygg8dl" path="res://resources/combatants/player/player.gd" id="1_rdk4u"]
+[ext_resource type="Resource" uid="uid://crskn2gxtrca5" path="res://resources/cards/ace_of_hearts/ace_of_hearts.tres" id="3_5t6nu"]
+[ext_resource type="Resource" uid="uid://dme3u7s1adqso" path="res://resources/cards/big_joker/big_joker.tres" id="3_onl1p"]
 
 [resource]
 script = ExtResource("1_rdk4u")
+is_player = true
+starting_cards = Array[ExtResource("1_onl1p")]([ExtResource("3_5t6nu"), ExtResource("3_onl1p"), ExtResource("3_onl1p"), ExtResource("3_onl1p"), ExtResource("3_5t6nu")])
 metadata/_custom_type_script = "uid://dn2uc4jf1bot2"

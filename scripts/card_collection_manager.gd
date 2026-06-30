@@ -1,16 +1,6 @@
 extends Control
 class_name CardCollectionManager
 
-signal reset_selectible_cards
-# Asks Logic God to recompute all cards' selectibility
-signal define_decks
-# Tells Logic God what decks are there
-signal played_cards
-# Tells Logic God what cards have been played and by whom 
-# (A combatant is identified with a deck)
-signal end_turn
-# Tells Logic God the current turn has ended and what card was drawn
-
 const CARD_SCENE_PATH = "res://scenes/card.tscn"
 const CARDS_FOLDER_PATH = "res://assets/Cards_Folder/"
 const CARD_TOOLTIPS_PATH = "res://texts/card_hover_tooltips.json"
@@ -41,16 +31,15 @@ var zone_defs := {
 	Global.zone_types.DISCARD: discard_scene
 }
 
-func _ready() -> void:
-	pass
-
-func make_zone(zone_type: Global.zone_types, zone_owner: Combatant, cards: Array[Card] = []) -> CardCollection:
+func make_zone(zone_type: Global.zone_types, zone_owner: Combatant, cards: Array[Card]) -> CardCollection:
 	var zone_scene: Resource = zone_defs[zone_type]
 	var collection: CardCollection = zone_scene.instantiate()
 	add_child(collection)
 	
 	collection.collection_owner = zone_owner
-	collection.is_player = true
+	for card in cards: 
+		collection.add_card(card)
+		card.card_owner = collection
 	return collection
 	
 # Moved functionality to CombatScene
@@ -101,25 +90,10 @@ func draw_card(deck: Deck, hand: Hand) -> Card:
 		chown(card, hand)
 		deck.set_expand(false)
 	return card
+
+func _on_chown_requested(card: Card, to: Global.zone_types):
+	var newOwner: CardCollection = card.card_owner.collection_owner.zones[to]
+	chown(card, newOwner)
 	
-func play_cards() -> void:
-	for card in selected_cards:
-		if not card: continue
-		var discard = zones_by_character_id[card.card_owner.character_id]["discard"]
-		chown(card, discard)
-		card.set_select(false)
-		card.card_owner.remove_card(card)
-	selected_cards = []
-	emit_signal("reset_selectible_cards", selected_cards)
-
-func _on_input_manager_toggle_card_select(card: Card) -> void:
-	if card.is_selected:
-		card.set_select(false)
-		selected_cards.erase(card)
-	else:
-		card.set_select(true)
-		selected_cards.append(card)
-	reset_selectible_cards.emit(selected_cards)
-
-func _on_logic_god_update_turn(deck: Deck) -> void:
-	current_turn_deck = deck
+func _ready() -> void:
+	Events.card_chown_requested.connect(_on_chown_requested)

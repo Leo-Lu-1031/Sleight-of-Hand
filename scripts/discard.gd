@@ -37,12 +37,13 @@ func render() -> void:
 			
 		tween.tween_property(card,"position", new_position, 0.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tween.set_parallel()	
-		card.memorized_z_index = (i*1.0/len(card_array))
+		card.set_card_z_index(100*(1-1.0*i/len(card_array)))
 		
 		## Later target for optimization: Do not render cards at the bottom
 		#if i < DECK_DISPLAY_COUNT + 1:
 			#
-		
+	pass
+	
 func add_card(card: Card) -> void:
 	card_array.insert(0, card)
 	render()

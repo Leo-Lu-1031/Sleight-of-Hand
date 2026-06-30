@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d3275j3xxo64m" path="res://resources/combatants/enemy1/enemy1.gd" id="1_h6yeq"]
 [ext_resource type="Script" uid="uid://dg20pikb6soyb" path="res://resource_templates/card_resource.gd" id="2_rvkes"]
+[ext_resource type="Resource" uid="uid://dh15o4gnssfkv" path="res://resources/cards/little_joker/little_joker.tres" id="3_rvkes"]
 
 [resource]
 script = ExtResource("1_h6yeq")
+starting_cards = Array[ExtResource("2_rvkes")]([ExtResource("3_rvkes"), ExtResource("3_rvkes"), ExtResource("3_rvkes")])
 metadata/_custom_type_script = "uid://dn2uc4jf1bot2"

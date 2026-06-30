@@ -7,7 +7,8 @@ const COLLISION_MASK_DECK = 3
 const CARD_WIDTH = 100
 const CARD_HEIGHT = 150
 
-enum zone_types {DECK = 0, HAND = 1, DISCARD = 2}
+enum zone_types {DECK, HAND, DISCARD} #{DECK = 0, HAND = 1, DISCARD = 2}
+enum select_types {UNSELECTIBLE = 0, NONE = 1, PRIMARY = 2, COST = 3, TARGET = 4}
 
 func raycast() -> Node2D:
 	var space_state = get_world_2d().direct_space_state

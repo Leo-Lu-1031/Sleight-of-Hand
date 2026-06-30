@@ -6,7 +6,10 @@
 [ext_resource type="Script" uid="uid://chp4t2udgyd6s" path="res://scripts/card_collection_manager.gd" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://vqm3g56g7ks5" path="res://scripts/logic_god.gd" id="5_tipki"]
+[ext_resource type="Script" uid="uid://q61qg1g0msar" path="res://scripts/effect_resolver.gd" id="5_ya4ey"]
+[ext_resource type="Script" uid="uid://35dbl06k0nda" path="res://scenes/turn_manager.gd" id="6_eb6dy"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://dncomr5cv7fod" path="res://scripts/selection_manager.gd" id="7_trceg"]
 [ext_resource type="PackedScene" uid="uid://dgyydx4ewcj6c" path="res://scenes/player.tscn" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://biqj8sxfxpbkr" path="res://assets/Isometric/block_E.png" id="123_1xgl0"]
 [ext_resource type="Texture2D" uid="uid://c6mrmpf1fohpy" path="res://assets/Isometric/floor_E.png" id="246_wa02r"]
@@ -50,20 +53,21 @@ tile_set = SubResource("TileSet_oufvw")
 [node name="CombatScene" type="Node2D" parent="." unique_id=1796783817]
 script = ExtResource("1_trceg")
 
-[node name="UIManager" type="Control" parent="CombatScene" unique_id=610089953]
-z_index = 100
-layout_mode = 3
-anchors_preset = 0
-offset_left = 1573.0
-offset_top = 852.0
-offset_right = 1573.0
-offset_bottom = 852.0
+[node name="EffectResolver" type="Node" parent="CombatScene" unique_id=516390154]
+script = ExtResource("5_ya4ey")
 
-[node name="PlayCardButton" parent="CombatScene/UIManager" unique_id=870228585 instance=ExtResource("1_o6xl0")]
+[node name="TurnManager" type="Node" parent="CombatScene" unique_id=1955496301]
+script = ExtResource("6_eb6dy")
 
-[node name="InputManager" type="Control" parent="CombatScene" unique_id=1528782791]
-layout_mode = 3
-anchors_preset = 0
+[node name="SelectionManager" type="Node" parent="CombatScene" unique_id=314556990]
+script = ExtResource("7_trceg")
+
+[node name="UIManager" type="Node" parent="CombatScene" unique_id=89920052]
+
+[node name="PlayCardsButton" parent="CombatScene/UIManager" unique_id=870228585 instance=ExtResource("1_o6xl0")]
+position = Vector2(721, 215)
+
+[node name="InputManager" type="Node" parent="CombatScene" unique_id=1290415697]
 script = ExtResource("6_tefeu")
 
 [node name="CardManager" type="Control" parent="CombatScene" unique_id=339667414]
@@ -88,10 +92,4 @@ anchors_preset = 0
 script = ExtResource("4_tefeu")
 
 [connection signal="end_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_end_drag"]
-[connection signal="play_cards" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_play_cards"]
 [connection signal="start_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_start_drag"]
-[connection signal="toggle_card_select" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_toggle_card_select"]
-[connection signal="define_decks" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_define_decks"]
-[connection signal="end_turn" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_end_turn"]
-[connection signal="played_cards" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_played_cards"]
-[connection signal="reset_selectible_cards" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_reset_selectible_cards"]
