@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://b3m1e8uqssswj"]
+[gd_scene format=3 uid="uid://dgyydx4ewcj6c"]
 
-[ext_resource type="Texture2D" path="res://scenes/Human_6_Idle0.png" id="1_3vyb7"]
-[ext_resource type="Script" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://3bdgiovpd12a" path="res://scenes/Human_6_Idle0.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://mfeewo48u7p5" path="res://scripts/player.gd" id="1_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g2els"]
 radius = 9.0

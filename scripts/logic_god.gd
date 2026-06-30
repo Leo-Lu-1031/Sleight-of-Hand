@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 signal update_selectibles
 # emit_signal("update_selectibles", selectibles: func(Card): boolean)

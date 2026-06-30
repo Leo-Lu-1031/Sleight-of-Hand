@@ -1,45 +1,99 @@
-[gd_scene format=3 uid="uid://bj5dshxnkk4hi"]
+[gd_scene format=4 uid="uid://bj5dshxnkk4hi"]
 
 [ext_resource type="PackedScene" uid="uid://ccvl4umv8offc" path="res://scenes/button.tscn" id="1_o6xl0"]
+[ext_resource type="Script" uid="uid://dkl723o4qdh8y" path="res://scripts/combat_scene.gd" id="1_trceg"]
 [ext_resource type="Script" uid="uid://h5qh0dd34oxy" path="res://scripts/card_manager.gd" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://chp4t2udgyd6s" path="res://scripts/card_collection_manager.gd" id="4_tefeu"]
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://vqm3g56g7ks5" path="res://scripts/logic_god.gd" id="5_tipki"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://dgyydx4ewcj6c" path="res://scenes/player.tscn" id="10_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://biqj8sxfxpbkr" path="res://assets/Isometric/block_E.png" id="123_1xgl0"]
+[ext_resource type="Texture2D" uid="uid://c6mrmpf1fohpy" path="res://assets/Isometric/floor_E.png" id="246_wa02r"]
 
-[node name="Combat" type="Node2D" unique_id=1141900535]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ya4ey"]
+texture = ExtResource("123_1xgl0")
+texture_region_size = Vector2i(256, 512)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 32)
+0:3/0 = 0
+0:2/0 = 0
+0:1/0 = 0
 
-[node name="UIManager" type="Node2D" parent="." unique_id=1599347455]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eb6dy"]
+texture = ExtResource("246_wa02r")
+texture_region_size = Vector2i(256, 128)
+0:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_oufvw"]
+tile_shape = 1
+tile_size = Vector2i(256, 128)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_ya4ey")
+sources/1 = SubResource("TileSetAtlasSource_eb6dy")
+
+[node name="Main" type="Node2D" unique_id=1344871708]
+
+[node name="Player" parent="." unique_id=835547012 instance=ExtResource("10_eb6dy")]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(-2, -1)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2045999197]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=279395853]
+y_sort_enabled = true
+texture_filter = 1
+tile_map_data = PackedByteArray("AAD9/wUAAQAAAAMAAAD+/wQAAQAAAAMAAAD+/wMAAQAAAAMAAAD//wMAAQAAAAMAAAAAAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAP//AQAAAAMAAAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAIAAQAAAAMAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAAAAAUAAQAAAAMAAAAAAAYAAQAAAAMAAAD//wcAAQAAAAMAAAD//wgAAQAAAAMAAAD+/wcAAQAAAAMAAAD+/wgAAQAAAAMAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAD7////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD9/wgAAAAAAAAAAAD//wQAAQAAAAMAAAD9/wkAAQAAAAMAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD+/woAAAAAAAAAAAD+/wkAAAAAAAAAAAD//woAAAAAAAAAAAD//wkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAYAAAAAAAAAAAABAAUAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAIAAAAAAAAAAAD+/wIAAQAAAAMAAAD+/wEAAQAAAAMAAAD//wAAAQAAAAMAAAD/////AQAAAAMAAAAAAP7/AQAAAAMAAAAAAP3/AQAAAAMAAAAAAPz/AQAAAAMAAAAAAPv/AQAAAAMAAAABAPr/AQAAAAMAAAABAPv/AQAAAAMAAAABAPz/AQAAAAMAAAABAP3/AQAAAAMAAAABAP7/AQAAAAMAAAAAAP//AQAAAAMAAAAAAAAAAQAAAAMAAAD//wEAAQAAAAMAAAD//wIAAQAAAAMAAAD//wYAAQAAAAMAAAD//wUAAQAAAAMAAAAAAAQAAQAAAAMAAAAAAAMAAQAAAAMAAAABAAIAAQAAAAMAAAABAAEAAQAAAAMAAAD//w4AAQAAAAMAAAD//w0AAQAAAAMAAAAAAAwAAQAAAAMAAAAAAAsAAQAAAAMAAAA=")
+tile_set = SubResource("TileSet_oufvw")
+
+[node name="CombatScene" type="Node2D" parent="." unique_id=1796783817]
+script = ExtResource("1_trceg")
+
+[node name="UIManager" type="Control" parent="CombatScene" unique_id=610089953]
 z_index = 100
-position = Vector2(1573, 852)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1573.0
+offset_top = 852.0
+offset_right = 1573.0
+offset_bottom = 852.0
 
-[node name="PlayCardButton" parent="UIManager" unique_id=870228585 instance=ExtResource("1_o6xl0")]
+[node name="PlayCardButton" parent="CombatScene/UIManager" unique_id=870228585 instance=ExtResource("1_o6xl0")]
 
-[node name="InputManager" type="Node2D" parent="." unique_id=58576845]
+[node name="InputManager" type="Control" parent="CombatScene" unique_id=1528782791]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("6_tefeu")
 
-[node name="CardManager" type="Node2D" parent="." unique_id=498823519]
+[node name="CardManager" type="Control" parent="CombatScene" unique_id=339667414]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("3_jyhfs")
 
-[node name="CardSlot" parent="." unique_id=355683985 instance=ExtResource("4_tipki")]
+[node name="CardSlot" parent="CombatScene" unique_id=355683985 instance=ExtResource("4_tipki")]
 position = Vector2(894, 363)
 
-[node name="LogicGod" type="Node2D" parent="." unique_id=1832189788]
+[node name="LogicGod" type="Control" parent="CombatScene" unique_id=722414150]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("5_tipki")
 
-[node name="CardCollectionManager" type="Node2D" parent="." unique_id=632489518]
+[node name="CardCollectionManager" type="Control" parent="CombatScene" unique_id=1356696380]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("4_tefeu")
 
-[connection signal="draw_card" from="InputManager" to="CardCollectionManager" method="_on_input_manager_draw_card"]
-[connection signal="end_drag" from="InputManager" to="CardManager" method="_on_input_manager_end_drag"]
-[connection signal="play_cards" from="InputManager" to="CardCollectionManager" method="_on_input_manager_play_cards"]
-[connection signal="start_drag" from="InputManager" to="CardManager" method="_on_input_manager_start_drag"]
-[connection signal="toggle_card_select" from="InputManager" to="CardCollectionManager" method="_on_input_manager_toggle_card_select"]
-[connection signal="toggle_deck_expand" from="InputManager" to="CardCollectionManager" method="_on_input_manager_toggle_deck_expand"]
-[connection signal="auto_play" from="LogicGod" to="CardCollectionManager" method="_on_logic_god_auto_play"]
-[connection signal="update_selectibles" from="LogicGod" to="CardManager" method="_on_logic_god_update_selectibles"]
-[connection signal="update_turn" from="LogicGod" to="CardCollectionManager" method="_on_logic_god_update_turn"]
-[connection signal="define_decks" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_define_decks"]
-[connection signal="end_turn" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_end_turn"]
-[connection signal="played_cards" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_played_cards"]
-[connection signal="reset_selectible_cards" from="CardCollectionManager" to="LogicGod" method="_on_card_collection_manager_reset_selectible_cards"]
+[connection signal="draw_card" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_draw_card"]
+[connection signal="end_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_end_drag"]
+[connection signal="play_cards" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_play_cards"]
+[connection signal="start_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_start_drag"]
+[connection signal="toggle_card_select" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_toggle_card_select"]
+[connection signal="toggle_deck_expand" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_toggle_deck_expand"]
+[connection signal="auto_play" from="CombatScene/LogicGod" to="CombatScene/CardCollectionManager" method="_on_logic_god_auto_play"]
+[connection signal="update_selectibles" from="CombatScene/LogicGod" to="CombatScene/CardManager" method="_on_logic_god_update_selectibles"]
+[connection signal="update_turn" from="CombatScene/LogicGod" to="CombatScene/CardCollectionManager" method="_on_logic_god_update_turn"]
+[connection signal="define_decks" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_define_decks"]
+[connection signal="end_turn" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_end_turn"]
+[connection signal="played_cards" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_played_cards"]
+[connection signal="reset_selectible_cards" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_reset_selectible_cards"]

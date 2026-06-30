@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_SLOT = 2
