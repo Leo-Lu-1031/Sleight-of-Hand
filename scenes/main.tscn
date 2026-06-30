@@ -94,7 +94,7 @@ DECK_POS = Vector2(880, 540)
 
 [node name="PlayerDeck" parent="CombatScene/CardCollectionManager" unique_id=2087038754 instance=ExtResource("5_tbgi4")]
 z_index = 200
-position = Vector2(960, 574)
+position = Vector2(1042, 574)
 PLAYER_DRAWABLE = true
 
 [node name="PlayerDiscard" parent="CombatScene/CardCollectionManager" unique_id=615566723 instance=ExtResource("9_85g3d")]
@@ -105,7 +105,7 @@ DECK_POS = Vector2(1040, 540)
 
 [node name="EnemyDeck" parent="CombatScene/CardCollectionManager" unique_id=539714442 instance=ExtResource("5_tbgi4")]
 z_index = 200
-position = Vector2(827, 574)
+position = Vector2(742, 574)
 EXPANSION_DIRECTION = Vector2(-1, 0)
 
 [node name="EnemyDiscard" parent="CombatScene/CardCollectionManager" unique_id=1307963111 instance=ExtResource("9_85g3d")]

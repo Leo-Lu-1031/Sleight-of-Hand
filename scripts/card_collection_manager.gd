@@ -1,5 +1,5 @@
 extends Control
-class_name CardCollectorManager
+class_name CardCollectionManager
 
 signal reset_selectible_cards
 # Asks Logic God to recompute all cards' selectibility
