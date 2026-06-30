@@ -12,9 +12,15 @@ var hand_y_pos
 
 # Called when the node enters the scene tree for the first time
 func _ready() -> void:
+	initiate_hand_pos()
+	render()
+	
+func initiate_hand_pos():
+	print(self,is_player)
 	var screen_size = get_viewport().size
 	center_screen_x = screen_size.x / 2.0
 	hand_y_pos = screen_size.y / 2.0 + (screen_size.y / 2.0 - 75 - Global.CARD_HEIGHT/2) * (1 if IS_AT_BOTTOM else -1)
+
 
 #@Override
 func add_card(card: Card) -> void:

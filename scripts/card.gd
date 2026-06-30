@@ -34,7 +34,6 @@ func _on_area_2d_mouse_entered() -> void:
 	emit_signal("hovered", self)
 
 func _on_area_2d_mouse_exited() -> void:
-	print('mouse exited ', self)
 	emit_signal("hovered_off", self)
 
 var showing_front := false
@@ -81,8 +80,6 @@ func render():
 		z_index = memorized_z_index
 		
 	get_node("Tooltips").visible = is_hovered
-		
-	print(scale, is_selected, is_selectible, is_hovered)
 	
 func set_select(selected: bool):
 	is_selected = selected
