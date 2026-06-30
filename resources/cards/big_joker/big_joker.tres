@@ -1,0 +1,7 @@
+[gd_resource type="Resource" format=3 uid="uid://dlpsu4vohm3pn"]
+
+[ext_resource type="Script" uid="uid://b6oms3ah5gvi2" path="res://resources/cards/big_joker/big_joker.gd" id="1_acwmv"]
+
+[resource]
+script = ExtResource("1_acwmv")
+metadata/_custom_type_script = "uid://dg20pikb6soyb"

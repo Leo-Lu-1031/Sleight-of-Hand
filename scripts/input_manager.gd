@@ -2,9 +2,7 @@ extends Control
 class_name InputManager
 
 signal play_cards()
-signal draw_card(deck: Deck)
 signal toggle_card_select(card: Card)
-signal toggle_deck_expand(deck: Deck)
 signal start_drag(card: Card)
 signal end_drag()
 
@@ -17,7 +15,7 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				var node_found = Global.raycast()
 				if node_found is Deck:
-					draw_card.emit(node_found)
+					Events.draw_card.emit(node_found)
 				if node_found is Card:
 					start_drag.emit(node_found)
 					if node_found.is_selectible:
@@ -30,4 +28,4 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				var node_found = Global.raycast()
 				if node_found is Deck:
-					toggle_deck_expand.emit(node_found)
+					node_found.toggle_expand()

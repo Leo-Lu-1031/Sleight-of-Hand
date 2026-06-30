@@ -1,0 +1,7 @@
+[gd_resource type="Resource" format=3 uid="uid://c868200l7wuci"]
+
+[ext_resource type="Script" uid="uid://bq585lgj1lpi0" path="res://resources/cards/little_joker/little_joker.gd" id="1_sptm4"]
+
+[resource]
+script = ExtResource("1_sptm4")
+metadata/_custom_type_script = "uid://dg20pikb6soyb"

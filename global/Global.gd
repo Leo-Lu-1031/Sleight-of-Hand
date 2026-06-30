@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 const COLLISION_MASK_CARD = 1
 const COLLISION_MASK_SLOT = 2
@@ -7,7 +7,7 @@ const COLLISION_MASK_DECK = 3
 const CARD_WIDTH = 100
 const CARD_HEIGHT = 150
 
-enum card_collection_types {DECK = 0, HAND = 1, DISCARD = 2}
+enum zone_types {DECK = 0, HAND = 1, DISCARD = 2}
 
 func raycast() -> Node2D:
 	var space_state = get_world_2d().direct_space_state

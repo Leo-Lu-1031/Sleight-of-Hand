@@ -74,26 +74,24 @@ script = ExtResource("3_jyhfs")
 [node name="CardSlot" parent="CombatScene" unique_id=355683985 instance=ExtResource("4_tipki")]
 position = Vector2(894, 363)
 
-[node name="LogicGod" type="Control" parent="CombatScene" unique_id=722414150]
+[node name="EnemyHandler" type="Control" parent="CombatScene" unique_id=722414150]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("5_tipki")
+
+[node name="SelectionTimer" type="Timer" parent="CombatScene/EnemyHandler" unique_id=1791187875]
+wait_time = 0.05
 
 [node name="CardCollectionManager" type="Control" parent="CombatScene" unique_id=1356696380]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("4_tefeu")
 
-[connection signal="draw_card" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_draw_card"]
 [connection signal="end_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_end_drag"]
 [connection signal="play_cards" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_play_cards"]
 [connection signal="start_drag" from="CombatScene/InputManager" to="CombatScene/CardManager" method="_on_input_manager_start_drag"]
 [connection signal="toggle_card_select" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_toggle_card_select"]
-[connection signal="toggle_deck_expand" from="CombatScene/InputManager" to="CombatScene/CardCollectionManager" method="_on_input_manager_toggle_deck_expand"]
-[connection signal="auto_play" from="CombatScene/LogicGod" to="CombatScene/CardCollectionManager" method="_on_logic_god_auto_play"]
-[connection signal="update_selectibles" from="CombatScene/LogicGod" to="CombatScene/CardManager" method="_on_logic_god_update_selectibles"]
-[connection signal="update_turn" from="CombatScene/LogicGod" to="CombatScene/CardCollectionManager" method="_on_logic_god_update_turn"]
-[connection signal="define_decks" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_define_decks"]
-[connection signal="end_turn" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_end_turn"]
-[connection signal="played_cards" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_played_cards"]
-[connection signal="reset_selectible_cards" from="CombatScene/CardCollectionManager" to="CombatScene/LogicGod" method="_on_card_collection_manager_reset_selectible_cards"]
+[connection signal="define_decks" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_define_decks"]
+[connection signal="end_turn" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_end_turn"]
+[connection signal="played_cards" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_played_cards"]
+[connection signal="reset_selectible_cards" from="CombatScene/CardCollectionManager" to="CombatScene/EnemyHandler" method="_on_card_collection_manager_reset_selectible_cards"]

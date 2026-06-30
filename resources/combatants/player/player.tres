@@ -1,0 +1,8 @@
+[gd_resource type="Resource" format=3 uid="uid://clvg4yoxtkrg2"]
+
+[ext_resource type="Script" uid="uid://dg20pikb6soyb" path="res://resource_templates/card_resource.gd" id="1_onl1p"]
+[ext_resource type="Script" uid="uid://c0er5a5ygg8dl" path="res://resources/combatants/player/player.gd" id="1_rdk4u"]
+
+[resource]
+script = ExtResource("1_rdk4u")
+metadata/_custom_type_script = "uid://dn2uc4jf1bot2"

@@ -7,6 +7,8 @@ var card_being_dragged: Card
 var card_rel_pos: Vector2
 var screen_size: Vector2
 
+@onready var card_scene = preload("res://scenes/card.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
@@ -53,11 +55,11 @@ func on_hovered_off_card(card: Card) -> void:
 		else:
 			is_hovering_on_card = false	
 			
-
-func _on_logic_god_update_selectibles(selectibility_func: Callable) -> void:
-	for card: Card in get_children():
-		card.set_selectible(selectibility_func.call(card))
-		
+func make_card(card_resource: CardResource) -> Card:
+	var new_card: Card = card_scene.instantiate()
+	new_card.card_resource = card_resource
+	add_child(new_card)
+	return new_card
 	
 	
 	

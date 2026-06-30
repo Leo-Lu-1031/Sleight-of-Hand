@@ -7,18 +7,39 @@ signal hovered_off
 
 #var starting_position
 
-var is_selected: bool = false
-var is_hovered: bool = false
-var is_selectible: bool = true
+var is_selected: bool = false:
+	set(selected):
+		is_selected = selected
+		render()
+		
+var is_hovered: bool = false:
+	set(hovered):
+		is_hovered = hovered
+		render()
+		
+var is_selectible: bool = false:
+	set(selectible):
+		is_selectible = selectible
+		render()
+		Events.card_selected_toggle(self, selectible)
+		
+var memorized_z_index := 0:
+	set(incoming_z_index):
+		memorized_z_index = incoming_z_index
+		render()
 
-@onready var sprite_front = $"CardImg"
+@onready var sprite_front = $CardImg
 @onready var sprite_back = $PokerBack
 @onready var glow = $Glow
 @onready var fog = $Fog
 
-var memorized_z_index := 0
-
 var card_owner: CardCollection
+var card_resource: CardResource: 
+	set(card_resource):
+		if not is_node_ready(): await ready
+		self.card_resource = card_resource
+		sprite_front.texture = card_resource.texture
+		get_node('Tooltips').text = card_resource.tooltips
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,12 +74,7 @@ func flip_card():
 		show_back()
 	elif showing_front == false:
 		show_front()
-		
-func set_card_texture(texture):
-	sprite_front.texture = texture
 	
-func set_card_tooltips(tooltips: String):
-	get_node('Tooltips').text = tooltips
 
 func render():
 	scale = Vector2(1,1)
@@ -80,19 +96,3 @@ func render():
 		z_index = memorized_z_index
 		
 	get_node("Tooltips").visible = is_hovered
-	
-func set_select(selected: bool):
-	is_selected = selected
-	render()
-	
-func set_selectible(selectible: bool):
-	is_selectible = selectible
-	render()
-
-func set_hover(hovered: bool):
-	is_hovered = hovered
-	render()
-	
-func set_card_z_index(incoming_z_index: float):
-	memorized_z_index = incoming_z_index
-	render()
