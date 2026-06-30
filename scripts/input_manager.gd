@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 			if event.pressed:
 				var node_found = Global.raycast()
 				if node_found is Deck:
-					emit_signal("draw_card", node_found)
+					emit_signal("draw_card", node_found.character_id)
 				if node_found is Card:
 					emit_signal("start_drag", node_found)
 					if node_found.is_selectible:
@@ -31,10 +31,3 @@ func _input(event: InputEvent) -> void:
 				var node_found = Global.raycast()
 				if node_found is Deck:
 					emit_signal("toggle_deck_expand", node_found)
-
-""" This is somewhat werid since we have decided to use a different structure 
-for our decks- which means that detection for different masking layer is unneeded
-I dont think that is too good
-Also in the future I need to decide whihc functions should go to which scripts.
-This is literally factorio where now every document is somewhat citing each other
-"""

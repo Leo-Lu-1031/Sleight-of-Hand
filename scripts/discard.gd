@@ -12,8 +12,7 @@ var expanded = false
 
 # Set by parent
 
-func set_deck_position(pos: Vector2) -> void:
-	position = pos
+func _ready() -> void:
 	render()
 
 #func shuffle() -> void:

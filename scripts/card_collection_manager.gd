@@ -25,66 +25,78 @@ var current_turn_deck: Deck
 
 var selected_cards: Array[Card]
 
-var players: int
-var enemies: int
+var players:= 1
+var enemies:= 1
+var hand_scene = preload(HAND_SCENE_PATH)
+var deck_scene = preload(DECK_SCENE_PATH)
+var discard_scene = preload(DISCARD_SCENE_PATH)
+'CONSISTENCY ISSUE 
+what does character, zone, combatant etc each mean'
 
-# Temporary Solution
+var zones_by_character_id = {}
 
-var character_by_id:= {}
-
-# zones_by_character_id[current_character_id][zone_name] = zone
+'
+var zones_by_character_id = {
+	0: {
+		"hand": Player0HandNode,
+		"deck": Player0DeckNode,
+		"discard": Player0DiscardNode
+	}
+}
+'
+var zone_defs := [
+	{"name": "hand", "scene": hand_scene},
+	{"name": "deck", "scene": deck_scene},
+	{"name": "discard", "scene": discard_scene}
+]
 
 func _ready() -> void:
 	initialize_characters(players, enemies)
 	load_cards()
 
-func initialize_characters(players,enemies): # Something about shadowing
-	# There probably is a thousand ways to make this look more elegant
+func initialize_characters(players,enemies) -> void: # Something about shadowing
 	var x = 0
-	var hand_scene = preload(HAND_SCENE_PATH)
-	var deck_scene = preload(DECK_SCENE_PATH)
-	var discard_scene = preload(DISCARD_SCENE_PATH)
 	for player in players: 
-		# Here we should use a for loop
-		# Instaniate, character_id, character_id dictionary, is_player	
-		var hand: CardCollection = hand_scene.instantiate()
-		var deck: CardCollection = deck_scene.instantiate()
-		var discard: CardCollection = discard_scene.instantiate()
-		hand.character_id = x
-		deck.character_id = x
-		discard.character_id = x
-		hand.is_player = true
-		deck.is_player = true
-		discard.is_player = true
-		character_by_id["player_hand_{id_num}".format({id_num = x})] = x
-		character_by_id["player_deck_{id_num}".format({id_num = x})] = x
-		character_by_id["player_discard_{id_num}".format({id_num = x})] = x
+		var player_zone_dict = {}
+		for zone in zone_defs:
+			var collection: CardCollection = zone["scene"].instantiate()
+			add_child(collection)
+			collection.character_id = x
+			collection.is_player = true
+			collection.zone_type = zone["name"]
+			collection.set_to_screen_position()
+			player_zone_dict[zone["name"]] = collection
+		zones_by_character_id[x] = player_zone_dict
 		x += 1
 	for enemy in enemies:
-		var hand: CardCollection = hand_scene.instantiate()
-		var deck: CardCollection = deck_scene.instantiate()
-		var discard: CardCollection = discard_scene.instantiate()
-		hand.character_id = x
-		deck.character_id = x
-		discard.character_id = x
-		hand.is_player = false
-		deck.is_player = false
-		discard.is_player = false
+		var player_zone_dict = {}
+		for zone in zone_defs:
+			var collection: CardCollection = zone["scene"].instantiate()
+			add_child(collection)
+			collection.character_id = x
+			collection.is_player = false
+			collection.zone_type = zone["name"]
+			collection.set_to_screen_position()
+			player_zone_dict[zone["name"]] = collection
+		zones_by_character_id[x] = player_zone_dict
 		x += 1
 	x = 0
+	print(zones_by_character_id)
+	
 
-func load_cards():
+func load_cards() -> void:
 	card_manager = $'../CardManager'
 	decks = []
 	for node in get_children():
 		if node is Deck: decks.append(node)
 	emit_signal("define_decks", decks)
 	current_turn_deck = decks[0]
+
 	var card_scene = preload(CARD_SCENE_PATH)
 	var dir := DirAccess.open(CARDS_FOLDER_PATH)
 	
 	var tooltips_file = FileAccess.open(CARD_TOOLTIPS_PATH, FileAccess.READ)
-	print(tooltips_file)
+	#print(tooltips_file)
 	var tooltips_str: String = tooltips_file.get_as_text()
 	
 	var tooltips: Dictionary = JSON.parse_string(tooltips_str)
@@ -126,41 +138,47 @@ func chown(card: Card, newOwner: CardCollection) -> void:
 	newOwner.add_card(card)
 	card.card_owner = newOwner
 	
-func draw_card(deck: Deck) -> Card:
+func draw_card(character_id: int) -> Card:
+	var deck = zones_by_character_id[character_id]["deck"]
+	var hand = zones_by_character_id[character_id]["hand"]
 	var card = deck.peek()
 	if card:
-		chown(card, get_node(hand_deck_correspondence[deck.name]))
+		chown(card, hand)
 		deck.set_expand(false)
 	return card
 	
 func play_cards() -> void:
 	for card in selected_cards:
 		if not card: continue
-		chown(card, $PlayerDiscard) # Lets keep it like this for now
+		var discard = zones_by_character_id[card.card_owner.character_id]["discard"]
+		chown(card, discard)
 		card.set_select(false)
 		card.card_owner.remove_card(card)
 	selected_cards = []
 	emit_signal("reset_selectible_cards", selected_cards)
 	
 		
-func animate_auto_turn(auto_deck: Deck, auto_selected: Array[Card]):
+func animate_auto_turn(auto_character_id: int, auto_selected: Array[Card]):
 	assert(selected_cards == [])
 	for card in auto_selected: 
 		card.set_select(true)
 	selected_cards = auto_selected
 	play_cards()
+	var auto_deck = zones_by_character_id[auto_character_id]["deck"]
 	emit_signal("played_cards", auto_deck, auto_selected)
 	# Ends turn after 1 second
 	get_tree().create_tween().tween_callback(
 		func (): 
-			var card_drawn: Card = draw_card(auto_deck)
+			var card_drawn: Card = draw_card(auto_character_id)
 			emit_signal('end_turn', auto_deck, card_drawn)
 	).set_delay(0.3)
 	
 	
-func _on_input_manager_draw_card(deck: Deck) -> void:
-	if deck != current_turn_deck: return
-	var card_drawn: Card = draw_card(deck)
+func _on_input_manager_draw_card(character_id: int) -> void:
+	var deck = zones_by_character_id[character_id]["deck"]
+
+	# if deck != current_turn_deck: return FIX LATER
+	var card_drawn: Card = draw_card(character_id)
 	selected_cards = []
 	emit_signal("reset_selectible_cards", selected_cards)
 	emit_signal('end_turn', deck, card_drawn)
@@ -183,5 +201,6 @@ func _on_logic_god_update_turn(deck: Deck) -> void:
 func _on_input_manager_play_cards() -> void:
 	play_cards()
 
-func _on_logic_god_auto_play(auto_deck: Deck, played_cards: Array[Card]) -> void:
+func _on_logic_god_auto_play(auto_character_id: int, played_cards: Array[Card]) -> void:
+	var auto_deck = zones_by_character_id[auto_character_id]["deck"]
 	animate_auto_turn(auto_deck, played_cards)
