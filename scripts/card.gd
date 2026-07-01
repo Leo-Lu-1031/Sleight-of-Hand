@@ -88,4 +88,4 @@ func render():
 	else:
 		z_index = _memorized_z_index
 		
-	get_node("Tooltips").visible = is_hovered
+	get_node("Tooltips").visible = is_hovered and showing_front
