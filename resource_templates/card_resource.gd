@@ -14,7 +14,7 @@ func is_eligible_target(card: Card, caller: Card, currentCosts: Array[Card], cur
 func satisfies_cost(caller: Card, currentCosts: Array[Card]) -> bool:
 	return true
 	
-func satisfies_target(caller: Card, currentTargets: Array[Card], currentCosts: Array[Card]) -> bool:
+func satisfies_target(caller: Card, currentCosts: Array[Card], currentTargets: Array[Card]) -> bool:
 	return true
 
 # Default card effect is to discard self and cost
