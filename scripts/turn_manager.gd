@@ -5,6 +5,7 @@ var turn_count: int = 0
 var combatants: Array[Combatant]
 
 # This implementation will crumble and burn when combatants are added and removed
+
 func _on_turn_end(combatant: Combatant):
 	assert(combatants[turn_count] == combatant)
 	turn_count = (turn_count + 1) % len(combatants)
