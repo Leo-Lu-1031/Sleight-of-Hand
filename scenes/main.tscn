@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b5vh0ptwqby8w" path="res://scenes/card_slot.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://vqm3g56g7ks5" path="res://scripts/logic_god.gd" id="5_tipki"]
 [ext_resource type="Script" uid="uid://q61qg1g0msar" path="res://scripts/effect_resolver.gd" id="5_ya4ey"]
-[ext_resource type="Script" uid="uid://35dbl06k0nda" path="res://scenes/turn_manager.gd" id="6_eb6dy"]
 [ext_resource type="Script" uid="uid://dt12mogeh4rx" path="res://scripts/input_manager.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://35dbl06k0nda" path="res://scripts/turn_manager.gd" id="6_trceg"]
 [ext_resource type="Script" uid="uid://dncomr5cv7fod" path="res://scripts/selection_manager.gd" id="7_trceg"]
 [ext_resource type="PackedScene" uid="uid://dgyydx4ewcj6c" path="res://scenes/player.tscn" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://biqj8sxfxpbkr" path="res://assets/Isometric/block_E.png" id="123_1xgl0"]
@@ -47,6 +47,7 @@ position = Vector2(-2, -1)
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=279395853]
 y_sort_enabled = true
 texture_filter = 1
+position = Vector2(420, -127)
 tile_map_data = PackedByteArray("AAD9/wUAAQAAAAMAAAD+/wQAAQAAAAMAAAD+/wMAAQAAAAMAAAD//wMAAQAAAAMAAAAAAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAP//AQAAAAMAAAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAIAAQAAAAMAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAAAAAUAAQAAAAMAAAAAAAYAAQAAAAMAAAD//wcAAQAAAAMAAAD//wgAAQAAAAMAAAD+/wcAAQAAAAMAAAD+/wgAAQAAAAMAAAD9/wQAAAAAAAAAAAD9/wMAAAAAAAAAAAD9/wIAAAAAAAAAAAD9/wEAAAAAAAAAAAD9/wAAAAAAAAAAAAD8////AAAAAAAAAAD8//7/AAAAAAAAAAD7////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAD8/wIAAAAAAAAAAAD8/wMAAAAAAAAAAAD8/wQAAAAAAAAAAAD8/wUAAAAAAAAAAAD8/wYAAAAAAAAAAAD8/wcAAAAAAAAAAAD9/wgAAAAAAAAAAAD//wQAAQAAAAMAAAD9/wkAAQAAAAMAAAD9/woAAAAAAAAAAAD9/wsAAAAAAAAAAAD+/woAAAAAAAAAAAD+/wkAAAAAAAAAAAD//woAAAAAAAAAAAD//wkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAABAAYAAAAAAAAAAAABAAUAAAAAAAAAAAACAAQAAAAAAAAAAAACAAMAAAAAAAAAAAADAAIAAAAAAAAAAAD+/wIAAQAAAAMAAAD+/wEAAQAAAAMAAAD//wAAAQAAAAMAAAD/////AQAAAAMAAAAAAP7/AQAAAAMAAAAAAP3/AQAAAAMAAAAAAPz/AQAAAAMAAAAAAPv/AQAAAAMAAAABAPr/AQAAAAMAAAABAPv/AQAAAAMAAAABAPz/AQAAAAMAAAABAP3/AQAAAAMAAAABAP7/AQAAAAMAAAAAAP//AQAAAAMAAAAAAAAAAQAAAAMAAAD//wEAAQAAAAMAAAD//wIAAQAAAAMAAAD//wYAAQAAAAMAAAD//wUAAQAAAAMAAAAAAAQAAQAAAAMAAAAAAAMAAQAAAAMAAAABAAIAAQAAAAMAAAABAAEAAQAAAAMAAAD//w4AAQAAAAMAAAD//w0AAQAAAAMAAAAAAAwAAQAAAAMAAAAAAAsAAQAAAAMAAAA=")
 tile_set = SubResource("TileSet_oufvw")
 
@@ -57,7 +58,7 @@ script = ExtResource("1_trceg")
 script = ExtResource("5_ya4ey")
 
 [node name="TurnManager" type="Node" parent="CombatScene" unique_id=1955496301]
-script = ExtResource("6_eb6dy")
+script = ExtResource("6_trceg")
 
 [node name="SelectionManager" type="Node" parent="CombatScene" unique_id=314556990]
 script = ExtResource("7_trceg")

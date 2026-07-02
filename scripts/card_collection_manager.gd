@@ -41,41 +41,7 @@ func make_zone(zone_type: Global.zone_types, zone_owner: Combatant, cards: Array
 		collection.add_card(card)
 		card.card_owner = collection
 	return collection
-	
-# Moved functionality to CombatScene
-#func initialize_characters(players,enemies) -> void: # Something about shadowing
-	#var x = 0
-	#for player in players: 
-		#var player_zones: Dictionary[Global.zone_types, CardCollection]
-		#for zone in Global.zone_types:
-			#print(zone)
-			#var zone_type: Resource = zone_defs[zone]
-			#var collection: CardCollection = zone_defs[zone].instantiate()
-			#add_child(collection)
-			#
-			#collection.character_id = x
-			#collection.is_player = true
-			#collection.zone_type = zone
-			#collection.set_to_screen_position()
-			#player_zones[zone] = collection
-		#zones_by_character_id[x] = player_zones
-		#x += 1
-	#for enemy in enemies:
-		#var enemy_zones = []
-		#for zone in Global.zone_types.values():
-			#var zone_type: Resource = zone_defs[zone]
-			#var collection: CardCollection = zone_defs[zone].instantiate()
-			#add_child(collection)
-			#
-			#collection.character_id = x
-			#collection.is_player = false
-			#collection.zone_type = zone
-			#collection.set_to_screen_position()
-			#enemy_zones.append(collection)
-		#zones_by_character_id[x] = enemy_zones
-		#x += 1
-	#x = 0
-	#print(zones_by_character_id)
+
 
 func chown(card: Card, newOwner: CardCollection) -> void:
 	var prev = card.card_owner
