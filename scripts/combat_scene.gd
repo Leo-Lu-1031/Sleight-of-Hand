@@ -43,6 +43,7 @@ func make_combatant(combatant_resource: CombatantResource) -> Combatant:
 	
 	combatants.append(combatant)
 	reposition_combatants()
+	Events.combatant_entered.emit(combatant)
 	return combatant
 	
 func reposition_combatants():

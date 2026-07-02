@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://r0ra2gvqkbs2"]
 
-[ext_resource type="Script" uid="uid://duq5i5iglxg63" path="res://scripts/card.gd" id="1_ktuci"]
-[ext_resource type="Texture2D" uid="uid://b7cew54tqvkly" path="res://assets/card_glow.png" id="2_kg30u"]
-[ext_resource type="Texture2D" uid="uid://b8hbksmgm28nu" path="res://assets/Cards_Folder/red_joker.png" id="2_ktuci"]
-[ext_resource type="Texture2D" uid="uid://tflm4ijcr3js" path="res://assets/Poker Back.png" id="3_sy11y"]
+[ext_resource type="Script" uid="uid://duq5i5iglxg63" path="res://scripts/cardui.gd" id="1_xdh7c"]
+[ext_resource type="Texture2D" uid="uid://b7cew54tqvkly" path="res://assets/card_glow.png" id="2_g122k"]
+[ext_resource type="Texture2D" uid="uid://b8hbksmgm28nu" path="res://assets/Cards_Folder/red_joker.png" id="3_yxmjs"]
+[ext_resource type="Texture2D" uid="uid://tflm4ijcr3js" path="res://assets/Poker Back.png" id="4_mlnt1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_al6o5"]
 size = Vector2(90.5, 127.5)
 
-[node name="Card" type="Node2D" unique_id=1015976020]
-script = ExtResource("1_ktuci")
+[node name="CardUI" type="Node2D" unique_id=1015976020]
+script = ExtResource("1_xdh7c")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1391510790]
 
@@ -19,34 +19,34 @@ shape = SubResource("RectangleShape2D_al6o5")
 [node name="Unselectible" type="Sprite2D" parent="." unique_id=456012049]
 modulate = Color(0, 0, 0, 1)
 scale = Vector2(0.118131034, 0.11532254)
-texture = ExtResource("2_kg30u")
+texture = ExtResource("2_g122k")
 
 [node name="Primary" type="Sprite2D" parent="." unique_id=989998420]
 visible = false
 scale = Vector2(0.118131034, 0.11532254)
-texture = ExtResource("2_kg30u")
+texture = ExtResource("2_g122k")
 
 [node name="Cost" type="Sprite2D" parent="." unique_id=1422020867]
 visible = false
 modulate = Color(1, 1, 0, 1)
 scale = Vector2(0.118131034, 0.11532254)
-texture = ExtResource("2_kg30u")
+texture = ExtResource("2_g122k")
 
 [node name="Target" type="Sprite2D" parent="." unique_id=1870841470]
 visible = false
 self_modulate = Color(1, 0, 1, 1)
 scale = Vector2(0.118131034, 0.11532254)
-texture = ExtResource("2_kg30u")
+texture = ExtResource("2_g122k")
 
 [node name="CardImg" type="Sprite2D" parent="." unique_id=795236220]
 position = Vector2(-7.6293945e-06, 0)
 scale = Vector2(0.185, 0.1776861)
-texture = ExtResource("2_ktuci")
+texture = ExtResource("3_yxmjs")
 
 [node name="PokerBack" type="Sprite2D" parent="." unique_id=781613061]
 position = Vector2(-1.9073486e-06, 0.100001335)
 scale = Vector2(0.12857142, 0.1257874)
-texture = ExtResource("3_sy11y")
+texture = ExtResource("4_mlnt1")
 
 [node name="Tooltips" type="RichTextLabel" parent="." unique_id=56860741]
 offset_left = -40.0

@@ -6,6 +6,8 @@ class_name SelectionManager
 
 enum stages {NONE, COST, TARGET}
 
+var primary_implicit = false
+
 var primary_card: Card = null
 var cost_cards: Array[Card] = []
 var target_cards: Array[Card] = []

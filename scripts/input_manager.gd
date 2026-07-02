@@ -18,8 +18,6 @@ func _input(event: InputEvent) -> void:
 				if node_found is Card:
 					start_drag.emit(node_found)
 					Events.card_select_toggle.emit(node_found)
-				if node_found is PlayCardsButton:
-					play_cards_button.emit()
 			else:
 				end_drag.emit()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -27,3 +25,7 @@ func _input(event: InputEvent) -> void:
 				var node_found = Global.raycast()
 				if node_found is Deck:
 					node_found.toggle_expand()
+
+
+func _on_play_cards_button_pressed() -> void:
+	play_cards_button.emit()

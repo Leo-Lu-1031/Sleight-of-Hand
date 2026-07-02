@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 Global="*res://global/Global.gd"
 Events="*uid://cqbkq0g5w0avo"
+UIEvents="*uid://dv8p8ufglcjp1"
 
 [display]
 

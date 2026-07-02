@@ -1,6 +1,23 @@
 [gd_scene format=3 uid="uid://ccvl4umv8offc"]
 
-[ext_resource type="Script" uid="uid://bhs6g26jmqg0k" path="res://scripts/button.gd" id="1_mi6dp"]
+[sub_resource type="GDScript" id="GDScript_n4pas"]
+script/source = "extends Node2D
+class_name Button
+
+@export name = \"\"
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Events.cards_playable.connect(
+		func(playable):
+			self.visible = playable
+	)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ytui5"]
 radius = 52.0
@@ -10,7 +27,7 @@ height = 234.0
 font_size = 37
 
 [node name="Button" type="Node2D" unique_id=870228585]
-script = ExtResource("1_mi6dp")
+script = SubResource("GDScript_n4pas")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2077956440]
 
